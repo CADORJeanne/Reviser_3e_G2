@@ -1,0 +1,1840 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Révisions 3e : les espaces productifs et leurs évolutions (G2). Flip cards, QCM, classements, croquis, plans et évaluation blanche.">
+<meta name="theme-color" content="#1E3A8A">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Révise G2">
+<meta name="format-detection" content="telephone=no">
+<title>Réviser G2 Espaces productifs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout : une colonne centrée façon « boîte à fiches bristol ». Les cartes sont des fiches lignées, chaque thème a sa couleur d'onglet. */
+:root{
+  --paper:#E8EBEE; --card:#FFFFFF; --ink:#18202C; --ink-2:#4F5B6B; --line:#CBD3DC;
+  --rule:#C9DAEE; --margin:#E6A3A3; --accent:#1E3A8A; --accent-ink:#FFFFFF; --gold:#A86A0C;
+  --ok:#15803D; --mid:#B45309; --ko:#B91C1C; --shadow:rgba(24,32,44,.12);
+  --c-def:#0F766E; --c-reperes:#A15C07; --c-orga:#B42318; --c-etal:#4D7C0F; --c-metro:#1D4ED8; --c-approf:#7C3AED; --c-methode:#7C3AED;
+  --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#10151C; --card:#19212B; --ink:#E7EBF0; --ink-2:#9DA9B8; --line:#2C3746;
+  --rule:#22334A; --margin:#5C2E2E; --accent:#9DB7FF; --accent-ink:#0E1626; --gold:#E3B252;
+  --ok:#4ADE80; --mid:#FBBF24; --ko:#F87171; --shadow:rgba(0,0,0,.45);
+  --c-def:#2DD4BF; --c-reperes:#F0B429; --c-orga:#F87171; --c-etal:#A3E635; --c-metro:#7EA6FF; --c-approf:#B794F6; --c-methode:#B794F6;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#10151C; --card:#19212B; --ink:#E7EBF0; --ink-2:#9DA9B8; --line:#2C3746;
+  --rule:#22334A; --margin:#5C2E2E; --accent:#9DB7FF; --accent-ink:#0E1626; --gold:#E3B252;
+  --ok:#4ADE80; --mid:#FBBF24; --ko:#F87171; --shadow:rgba(0,0,0,.45);
+  --c-def:#2DD4BF; --c-reperes:#F0B429; --c-orga:#F87171; --c-etal:#A3E635; --c-metro:#7EA6FF; --c-approf:#B794F6; --c-methode:#B794F6;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:20px 56px}
+h1,h2,h3{text-wrap:balance;margin:0}
+.mono{font-family:var(--f-mono)}
+.muted{color:var(--ink-2)}
+
+/* ---------- Barre du haut ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.tab-h2{font-family:var(--f-display);font-weight:900;font-size:30px;line-height:1;padding:6px 10px 4px;border:2.5px solid var(--ink);border-radius:4px;letter-spacing:.02em}
+.brand-txt{min-width:0}
+.brand-txt b{display:block;font-family:var(--f-display);font-weight:800;font-size:21px;line-height:1.05;letter-spacing:.01em;text-transform:uppercase}
+.brand-txt span{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);letter-spacing:.06em;text-transform:uppercase}
+.navbtns{display:flex;gap:8px}
+.ghost{background:transparent;border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+.ghost:hover{border-color:var(--ink-2)}
+
+/* ---------- Tableau de bord ---------- */
+.dash{background:var(--card);border-radius:14px;box-shadow:0 1px 0 var(--line),0 10px 30px -18px var(--shadow);padding:20px;display:grid;gap:18px}
+.player{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.lvl{width:66px;height:66px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);font-family:var(--f-display);font-weight:900;font-size:32px;line-height:1;position:relative}
+.lvl small{position:absolute;bottom:-8px;font-family:var(--f-mono);font-size:10px;background:var(--card);color:var(--ink);border:1.5px solid var(--accent);border-radius:999px;padding:1px 7px;letter-spacing:.06em}
+.pinfo{flex:1;min-width:200px}
+.pname{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pname h2{font-family:var(--f-display);font-weight:800;font-size:26px;line-height:1.1;text-transform:uppercase;letter-spacing:.01em}
+.namefield{display:flex;gap:6px;align-items:center;margin-top:2px}
+.namefield input{font:inherit;font-size:16px;padding:5px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);width:180px;max-width:100%}
+.xpbar{height:12px;border-radius:999px;background:var(--paper);overflow:hidden;margin-top:8px;border:1px solid var(--line)}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:999px;transition:width .6s ease}
+.xptxt{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:12px;color:var(--ink-2);margin-top:4px;font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.stat b{display:block;font-family:var(--f-display);font-weight:900;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--ink-2);line-height:1.25;display:block;margin-top:3px}
+.stat.ready b{color:var(--ok)}
+.stat.fire b{color:var(--mid)}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+.sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:26px 0 10px;flex-wrap:wrap}
+.sec-title h3{font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em}
+.linkbtn{background:none;border:0;padding:0;color:var(--accent);font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px}
+
+/* Thèmes = onglets de boîte à fiches */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.theme{--c:var(--accent);text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:12px 12px 10px;display:grid;gap:6px;position:relative;transition:border-color .15s,transform .15s}
+.theme:hover{transform:translateY(-1px)}
+.theme[aria-pressed="true"]{border-color:var(--c);box-shadow:inset 0 0 0 1px var(--c);background:var(--card);background:color-mix(in srgb,var(--c) 7%,var(--card))}
+.theme .th-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.theme .th-name{font-weight:700;font-size:15.5px;line-height:1.2;color:var(--ink)}
+.chk{width:20px;height:20px;border-radius:5px;border:2px solid var(--line);flex:none;display:grid;place-items:center}
+.theme[aria-pressed="true"] .chk{background:var(--c);border-color:var(--c)}
+.theme[aria-pressed="true"] .chk::after{content:"";width:10px;height:5px;border-left:2.5px solid var(--card);border-bottom:2.5px solid var(--card);transform:rotate(-45deg) translate(1px,-1px)}
+.th-meta{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.mbar{height:6px;border-radius:999px;background:var(--paper);overflow:hidden}
+.mbar i{display:block;height:100%;background:var(--c);border-radius:999px}
+.theme .dot{width:10px;height:10px;border-radius:50%;background:var(--c);display:inline-block;margin-right:7px;vertical-align:1px}
+
+/* Modes */
+.modes{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (max-width:700px){.modes{grid-template-columns:1fr}}
+.mode{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start}
+.mode h4{margin:0;font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+.mode p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.4}
+.seg{display:flex;gap:4px;background:var(--paper);border-radius:999px;padding:3px;width:max-content;max-width:100%}
+.seg button{border:0;background:transparent;border-radius:999px;padding:4px 11px;font-size:13px;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px var(--shadow)}
+.go{background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:11px 14px;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s,filter .12s}
+.go:hover{filter:brightness(1.08)}
+.go:active{transform:scale(.98)}
+.go.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.go[disabled]{opacity:.45;cursor:not-allowed}
+.review-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;padding:12px 14px;border-radius:10px;border:1.5px dashed var(--ko);background:var(--card);background:color-mix(in srgb,var(--ko) 6%,var(--card))}
+.review-banner p{margin:0;font-size:14.5px;min-width:0}
+.review-banner .go{background:var(--ko);color:var(--card)}
+
+.badge-strip{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- Session ---------- */
+.sess-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.prog{flex:1;height:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);transition:width .35s ease}
+.sess-count{font-family:var(--f-mono);font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.combo{font-family:var(--f-display);font-weight:900;font-size:19px;color:var(--mid);min-width:64px;text-align:right;letter-spacing:.02em}
+.combo.pop{animation:pop .35s ease}
+@keyframes pop{50%{transform:scale(1.35)}}
+
+.stage{perspective:1600px}
+.flip{display:grid;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.75,.25,1);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.flip.flipped{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border-radius:14px;box-shadow:0 1px 0 var(--line),0 18px 40px -22px var(--shadow);min-height:340px;display:flex;flex-direction:column;overflow:hidden;--c:var(--accent)}
+.face.back{transform:rotateY(180deg)}
+/* fiche bristol : lignes bleues + marge rouge */
+.ruled{flex:1;display:flex;flex-direction:column;padding:22px 22px 18px 44px;position:relative;
+  background-image:linear-gradient(var(--card) 0 0),repeating-linear-gradient(to bottom,transparent 0 27px,var(--rule) 27px 28px);
+  background-size:2px 100%,100% 100%;background-repeat:no-repeat;background-position:30px 0,0 6px}
+.ruled::before{content:"";position:absolute;left:32px;top:0;bottom:0;width:1.5px;background:var(--margin)}
+.fhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;border-bottom:3px solid var(--c);background:var(--card);background:color-mix(in srgb,var(--c) 9%,var(--card))}
+.ftag{font-family:var(--f-mono);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.fbox{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);display:flex;gap:3px;align-items:center}
+.fbox i{width:8px;height:8px;border-radius:2px;background:var(--line);display:inline-block}
+.fbox i.on{background:var(--c)}
+.q{font-weight:700;font-size:clamp(21px,3.6vw,28px);line-height:1.3;margin:auto 0;text-wrap:balance;padding-block:18px}
+.hint{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);text-align:center;letter-spacing:.04em;margin-top:auto}
+.ans-label{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--c);font-weight:600}
+.ans{font-weight:700;font-size:clamp(18px,2.8vw,22px);line-height:1.35;margin:4px 0 10px}
+.det{font-size:15.5px;line-height:1.6;margin:0 0 12px;color:var(--ink)}
+.det ul{margin:4px 0;padding-left:20px}
+.plus{margin-top:auto;border-radius:10px;padding:10px 12px;background:var(--card);background:color-mix(in srgb,var(--c-approf) 8%,var(--card));border:1px solid color-mix(in srgb,var(--c-approf) 30%,var(--card));font-size:14.5px;line-height:1.5}
+.plus b.lab{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--c-approf);margin-bottom:2px}
+.qback{font-size:13.5px;color:var(--ink-2);margin:0 0 6px;font-style:italic}
+
+.rate{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.rate button{border:2px solid var(--line);background:var(--card);border-radius:12px;padding:12px 8px;font-weight:700;font-size:15px;display:grid;gap:2px;justify-items:center;transition:transform .1s}
+.rate button small{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--ink-2)}
+.rate button:active{transform:scale(.97)}
+.rate .r0{border-color:var(--ko);color:var(--ko)}
+.rate .r1{border-color:var(--mid);color:var(--mid)}
+.rate .r2{border-color:var(--ok);color:var(--ok)}
+.rate .r0:hover{background:var(--card);background:color-mix(in srgb,var(--ko) 8%,var(--card))}
+.rate .r1:hover{background:var(--card);background:color-mix(in srgb,var(--mid) 8%,var(--card))}
+.rate .r2:hover{background:var(--card);background:color-mix(in srgb,var(--ok) 8%,var(--card))}
+.reveal{margin-top:14px;width:100%}
+.keys{text-align:center;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);margin-top:10px}
+@media (hover:none){.keys{display:none}}
+.xpfloat{position:fixed;left:50%;top:40%;transform:translateX(-50%);font-family:var(--f-display);font-weight:900;font-size:38px;color:var(--gold);pointer-events:none;animation:xpf .9s ease forwards;z-index:30;text-shadow:0 2px 0 var(--card)}
+@keyframes xpf{0%{opacity:0;transform:translate(-50%,10px)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-60px)}}
+
+/* QCM */
+.qcm-opts{display:grid;gap:10px;margin-top:14px}
+.opt{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15.5px;line-height:1.4;display:flex;gap:12px;align-items:flex-start}
+.opt .l{font-family:var(--f-mono);font-weight:600;width:26px;height:26px;flex:none;border-radius:6px;display:grid;place-items:center;background:var(--paper);font-size:13px}
+.opt:hover:not([disabled]){border-color:var(--ink-2)}
+.opt.good{border-color:var(--ok);background:var(--card);background:color-mix(in srgb,var(--ok) 10%,var(--card))}
+.opt.bad{border-color:var(--ko);background:var(--card);background:color-mix(in srgb,var(--ko) 10%,var(--card))}
+.opt[disabled]{cursor:default}
+.feedback{margin-top:12px;border-radius:12px;padding:12px 14px;background:var(--card);border-left:5px solid var(--ok);font-size:15px}
+.feedback.ko{border-left-color:var(--ko)}
+.feedback b.v{display:block;font-family:var(--f-display);font-size:20px;text-transform:uppercase;letter-spacing:.02em}
+.timer{height:4px;background:var(--line);border-radius:999px;overflow:hidden;margin-top:-2px}
+.timer i{display:block;height:100%;background:var(--gold);width:100%}
+
+/* Frise */
+.frise-pool{display:grid;gap:10px;margin-top:14px}
+.ev{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px;font-size:15.5px;line-height:1.35;--c:var(--accent)}
+.ev .n{width:32px;height:32px;flex:none;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:19px}
+.ev.picked{border-color:var(--accent)}
+.ev.picked .n{border:0;background:var(--accent);color:var(--accent-ink)}
+.ev .tg{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--c);display:block}
+.ev .yr{margin-left:auto;font-family:var(--f-mono);font-weight:600;font-size:13px;white-space:nowrap}
+.ev.right{border-color:var(--ok)}
+.ev.wrong{border-color:var(--ko)}
+.ev.right .n{background:var(--ok);color:var(--card)}
+.ev.wrong .n{background:var(--ko);color:var(--card)}
+.timeline{position:relative;margin-top:16px;padding-left:22px;display:grid;gap:10px}
+.timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:3px;background:var(--line);border-radius:2px}
+.tl{position:relative;font-size:15px}
+.tl::before{content:"";position:absolute;left:-20px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--c,var(--accent));border:2px solid var(--card)}
+.tl b{font-family:var(--f-mono);font-size:13px;margin-right:8px}
+
+/* Fin de session */
+.endcard{background:var(--card);border-radius:14px;padding:22px;box-shadow:0 1px 0 var(--line),0 18px 40px -22px var(--shadow);display:grid;gap:16px}
+.endcard h2{font-family:var(--f-display);font-weight:900;font-size:clamp(30px,6vw,44px);text-transform:uppercase;line-height:1}
+.endstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:560px){.endstats{grid-template-columns:repeat(2,1fr)}}
+.endstats .stat b.k{color:var(--ko)} .endstats .stat b.m{color:var(--mid)} .endstats .stat b.o{color:var(--ok)} .endstats .stat b.x{color:var(--gold)}
+.miss{display:grid;gap:8px}
+.miss details{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;--c:var(--accent)}
+.miss summary{cursor:pointer;font-weight:700;font-size:15px;list-style-position:outside}
+.miss summary .ftag{margin-right:8px}
+.miss details p{margin:8px 0 0;font-size:15px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row .go{flex:1;min-width:180px}
+
+/* Badges */
+.medal{width:92px;display:grid;justify-items:center;gap:6px;text-align:center}
+.medal .disc{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--gold) 55%,var(--card)),var(--gold));color:var(--card);box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 0 0 3px var(--card),0 0 0 5px var(--gold)}
+.medal .disc svg{width:30px;height:30px}
+.medal span{font-size:12px;font-weight:700;line-height:1.2}
+.medal.locked .disc{background:var(--paper);color:var(--ink-2);box-shadow:inset 0 0 0 2px var(--line);opacity:.8}
+.medal.locked span{color:var(--ink-2);font-weight:400}
+.badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.bitem{display:flex;gap:12px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px}
+.bitem .medal{width:auto}
+.bitem .medal .disc{width:52px;height:52px}
+.bitem .medal .disc svg{width:24px;height:24px}
+.bitem b{display:block;font-size:15px}
+.bitem p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.35}
+.bitem.locked b{color:var(--ink-2)}
+.bilan{background:var(--card);border-radius:14px;padding:20px;border:2px solid var(--ink);display:grid;gap:12px;position:relative;overflow:hidden}
+.bilan .stamp{position:absolute;right:14px;top:14px;transform:rotate(8deg);border:3px solid var(--ok);color:var(--ok);font-family:var(--f-display);font-weight:900;font-size:18px;text-transform:uppercase;padding:2px 10px;border-radius:6px;letter-spacing:.04em}
+.bilan h2{font-family:var(--f-display);font-weight:900;font-size:28px;text-transform:uppercase;padding-right:120px}
+.tbars{display:grid;gap:7px}
+.tbar{display:grid;grid-template-columns:150px 1fr 44px;gap:10px;align-items:center;font-size:14px;--c:var(--accent)}
+.tbar .mbar{height:9px}
+.tbar b{font-family:var(--f-mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.tbar{grid-template-columns:110px 1fr 40px;font-size:13px}}
+.danger{background:none;border:1.5px solid var(--ko);color:var(--ko);border-radius:8px;padding:7px 12px;font-weight:700;font-size:13.5px}
+.confirm-box{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(140%);background:var(--ink);color:var(--paper);border-radius:14px;padding:12px 16px 12px 12px;display:flex;align-items:center;gap:12px;z-index:40;transition:transform .45s cubic-bezier(.2,.9,.3,1.2);max-width:calc(100% - 32px);box-shadow:0 12px 30px -10px var(--shadow)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast .medal .disc{width:46px;height:46px;box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--gold)}
+.toast .medal .disc svg{width:22px;height:22px}
+.toast small{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.toast b{font-size:16px}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:35}
+.foot{margin-top:34px;font-size:12.5px;color:var(--ink-2);text-align:center;font-family:var(--f-mono)}
+.fade-in{animation:fin .3s ease}
+@keyframes fin{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .flip{transform:none!important}
+  .face.back{transform:none}
+  .flip .face.back{visibility:hidden}
+  .flip.flipped .face.front{visibility:hidden}
+  .flip.flipped .face.back{visibility:visible}
+}
+
+.plan{display:grid;gap:8px;margin-top:2px}
+.plan>div{border-radius:8px;padding:8px 10px;background:var(--card);background:color-mix(in srgb,var(--c-methode) 7%,var(--card));border:1px solid color-mix(in srgb,var(--c-methode) 25%,var(--card));line-height:1.45}
+.plan>div b{display:block;font-size:.95em}
+.plan .pl-i{background:transparent;border-style:dashed}
+.plan .pl-p b{color:var(--c-methode);text-transform:uppercase;letter-spacing:.02em}
+
+.how{margin-top:16px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px 18px}
+.how h3{font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 8px}
+.how ol{margin:0;padding:0;list-style:none;counter-reset:st;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.how li{counter-increment:st;font-size:14.5px;line-height:1.4;display:grid;gap:4px;align-content:start;min-width:0}
+.how li::before{content:counter(st);width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:17px}
+.how p{margin:12px 0 0;font-size:14px;color:var(--ink-2)}
+@media (max-width:640px){.how ol{grid-template-columns:1fr 1fr}}
+
+/* Tactile : pas de zoom au double appui, pas de surlignage gris, pas de sélection en touchant la carte */
+button,.flip,.opt,.ev,.theme{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.flip{-webkit-user-select:none;user-select:none}
+/* Les boutons de notation restent visibles en bas de l'écran, même si le corrigé est long */
+#actions{position:sticky;bottom:0;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--paper) 70%,transparent);z-index:3}
+#actions .rate,#actions .reveal{margin-top:10px}
+/* Écrans peu hauts (téléphone à l'horizontale) */
+@media (max-height:520px){
+  .face{min-height:200px}
+  .q{padding-block:8px;font-size:20px}
+  .ruled{padding-top:12px;padding-bottom:10px}
+  .wrap{padding-block:10px 30px}
+  .rate button{padding:8px 6px}
+}
+/* Tablettes : 4 colonnes de thèmes */
+@media (min-width:760px) and (max-width:1100px){.themes{grid-template-columns:repeat(4,1fr)}}
+
+.namefield select{font:inherit;font-size:16px;padding:5px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);max-width:100%}
+.namefield select.need{border-color:var(--mid);box-shadow:0 0 0 2px color-mix(in srgb,var(--mid) 25%,transparent)}
+.namefield{flex-wrap:wrap}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:3px 10px 3px 8px}
+.chip svg{color:var(--accent);flex:none}
+
+.mode.exam{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.veille{justify-self:start;font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);border:1.5px solid var(--mid);border-radius:999px;padding:2px 10px}
+.opt.chosen{border-color:var(--accent);background:var(--card);background:color-mix(in srgb,var(--accent) 10%,var(--card))}
+.opt.chosen .l{background:var(--accent);color:var(--accent-ink)}
+.note20{font-size:clamp(56px,12vw,84px)!important;color:var(--accent)}
+.note20 small{font-size:.4em;color:var(--ink-2);margin-left:4px}
+.review-banner.today{margin-top:0;margin-bottom:14px;border-style:solid;border-color:var(--mid);background:var(--card);background:color-mix(in srgb,var(--mid) 8%,var(--card))}
+.review-banner.today .go{background:var(--mid);color:var(--card)}
+
+/* ---------- Modes géographie ---------- */
+.rate.two{grid-template-columns:1fr 1fr}
+.rate.two button{font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.03em;padding:14px 8px}
+.rate.two button small{font-family:var(--f-mono);text-transform:none;letter-spacing:0;font-size:11px;font-weight:500}
+.rate button[disabled]{cursor:default;opacity:.5}
+.rate button.picked{opacity:1;background:var(--card);background:color-mix(in srgb,currentColor 10%,var(--card))}
+.sch{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:14px;align-items:start;margin-top:14px}
+.sch-draw{background:#FFFDF7;border-radius:14px;box-shadow:0 1px 0 var(--line),0 18px 40px -22px var(--shadow);padding:12px;position:sticky;top:10px}
+.sch-draw .ftag{display:block;text-align:center;color:#1E3A8A;margin-bottom:4px}
+.sch-draw svg{display:block;width:100%;height:auto}
+@media (max-width:720px){.sch{grid-template-columns:1fr}.sch-draw{position:static;max-width:420px;margin:0 auto;width:100%}}
+.leg{padding:6px 16px 14px}
+.leg h5{margin:12px 0 4px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.lrow{display:flex;align-items:center;gap:10px;margin:6px 0}
+.fig{width:46px;flex:none;display:grid;place-items:center}
+.sw{width:42px;height:22px;border-radius:4px;border:1px solid rgba(0,0,0,.25)}
+.fig svg{width:46px;height:18px}
+.eqt{flex:none;width:150px;font-size:13px;color:var(--ink-2);line-height:1.25}
+.slot{flex:1;min-width:0;min-height:42px;border:2px dashed var(--line);border-radius:10px;display:flex;align-items:center;padding:3px;transition:border-color .15s,background .15s}
+.slot:empty::before{content:"…";color:var(--ink-2);padding-left:10px;font-family:var(--f-mono)}
+.bank.hover{border-color:var(--accent)}
+.slot.hover{border-color:var(--accent);background:var(--card);background:color-mix(in srgb,var(--accent) 8%,var(--card))}
+.slot.good{border-style:solid;border-color:var(--ok);background:var(--card);background:color-mix(in srgb,var(--ok) 10%,var(--card))}
+.slot.bad{border-style:solid;border-color:var(--ko);background:var(--card);background:color-mix(in srgb,var(--ko) 10%,var(--card))}
+.lbl{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:999px;background:var(--card);border:2px solid var(--ink);font-weight:700;font-size:14px;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;line-height:1.2;text-align:center}
+.lbl.sel{background:var(--ink);color:var(--card)}
+.lbl.dragging{opacity:.3}
+.slot .lbl{width:100%;border-radius:8px;border-width:1.5px}
+.bank{display:flex;flex-wrap:wrap;gap:8px;padding:12px;min-height:60px;margin-top:12px;background:var(--card);border:1.5px dashed var(--line);border-radius:12px}
+.bank:empty::before{content:attr(data-empty);color:var(--ink-2);font-size:14px;padding:6px}
+.dragghost{position:fixed;pointer-events:none;z-index:60;transform:translate(-50%,-50%) rotate(-3deg);box-shadow:0 10px 24px var(--shadow)}
+.corr{font-size:12.5px;color:var(--ko);font-weight:700;margin:-2px 0 4px 56px}
+.corr.eqc{margin-left:160px}
+.feedback ul{margin:6px 0 8px;padding-left:20px}
+.feedback li{margin:3px 0}
+.subj{display:grid;gap:10px;margin-top:14px}
+.skel{display:grid;gap:3px;margin-top:6px}
+.skel div{font-weight:700;font-size:15px}
+.skel b{font-family:var(--f-mono);color:var(--c-methode);margin-right:8px}
+.idea{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;gap:12px;align-items:center;margin-top:8px}
+.idea p{margin:0;flex:1;font-size:15px;line-height:1.4}
+.idea .why{display:block;font-size:13px;font-weight:700;color:var(--ko);margin-top:3px}
+.idea.right{border-color:var(--ok)}
+.idea.wrong{border-color:var(--ko)}
+.idea .seg button{min-width:40px;padding:6px 10px;font-size:14px}
+.idea .seg button[disabled]{cursor:default}
+.plan ul{margin:2px 0 0;padding-left:18px}
+@media (max-width:560px){.idea{flex-direction:column;align-items:stretch}.idea .seg{align-self:flex-end}.eqt{width:112px}.corr.eqc{margin-left:0}}
+
+/* ---------- Choix schéma / carte ---------- */
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.pickcard{text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:10px;align-content:start;transition:border-color .15s,transform .15s}
+.pickcard:hover{border-color:var(--ink);transform:translateY(-2px)}
+.pk-img{display:block;border-radius:10px;overflow:hidden;background:#FFFDF7;aspect-ratio:1/1;max-width:100%}
+.pk-img svg{display:block;width:100%;height:100%;object-fit:contain}
+.pk-txt{display:grid;gap:4px}
+.pk-txt b{font-family:var(--f-display);font-weight:800;font-size:21px;text-transform:uppercase;letter-spacing:.02em;line-height:1.1}
+.pk-txt span{font-size:14px;color:var(--ink-2);line-height:1.4}
+.pk-txt .fbox{color:var(--ok);font-weight:600}
+@media (max-width:560px){.pick{grid-template-columns:1fr}.pickcard{grid-template-columns:96px 1fr;align-items:center}}
+/* ---------- Carte à compléter ---------- */
+.ctabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.ctabs button{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:6px 13px;font-weight:700;font-size:14px;color:var(--ink-2)}
+.ctabs button[aria-selected="true"]{border-color:var(--ink);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.cgrid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);gap:14px;align-items:start}
+.cmap{position:relative;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 0 var(--line),0 18px 40px -22px var(--shadow);container-type:inline-size}
+.cmap img{display:block;width:100%;height:auto}
+.cside{position:sticky;top:10px;display:grid;gap:8px}
+.cons{margin:0;font-weight:700;font-size:15.5px}
+.chint{margin:0;font-size:13px}
+.cmap svg{display:block;width:100%;height:auto}
+.pin{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;border:2.5px solid var(--pc);background:#fff;color:var(--pc);font-family:var(--f-mono);font-weight:600;font-size:13px;display:grid;place-items:center;padding:0;box-shadow:0 2px 6px rgba(0,0,0,.25);z-index:2;transition:transform .12s}
+.pin.hover,.pin:hover{transform:translate(-50%,-50%) scale(1.25)}
+@keyframes pinpulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--pc) 30%,transparent)}}
+.mtag{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font-family:var(--f-body);font-weight:700;font-size:clamp(10px,2.3cqw,15px);line-height:1.1;color:var(--pc);background:rgba(255,255,255,.88);border-radius:6px;padding:2px 5px;border:1.5px solid transparent;z-index:2}
+.mtag.cur{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;border-color:var(--pc);border-style:dashed}
+.mtag.cur.dragging{opacity:.3}
+.mtag.cur.hover{box-shadow:0 0 0 4px color-mix(in srgb,var(--pc) 35%,transparent)}
+.mtag.ok{border-color:#15803D;border-style:solid}
+.mtag.ko{border-color:#B91C1C;border-style:solid;background:#FDECEC}
+.t-mers,.t-pays{text-transform:uppercase;letter-spacing:.03em}
+.t-mers{--pc:#1D4ED8} .t-fleuves{--pc:#1D4ED8} .t-pays{--pc:#18202C} .t-villes{--pc:#C0261A}
+.t-fleuves.mtag{font-style:italic}
+.ctabs .t-mers,.ctabs .t-pays{text-transform:none;letter-spacing:0}
+.lbl.t-mers,.lbl.t-pays{font-size:12.5px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lbl.t-pays{--pc:var(--ink)}}
+.cside .lbl{border-color:var(--pc,var(--ink));color:var(--pc,var(--ink))}
+.cside .lbl.sel{background:var(--pc,var(--ink));color:var(--card)}
+@media (max-width:720px){
+  .bank.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;margin:0;border-radius:16px 16px 0 0;border:0;border-top:2px solid var(--line);max-height:36vh;overflow-y:auto;padding:12px max(14px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));box-shadow:0 -10px 30px -12px var(--shadow);background:var(--card)}
+  .wrap:has(.bank.dock){padding-bottom:42vh}
+  .cgrid{grid-template-columns:1fr}
+  .cside{position:static;order:-1}
+  .pin{width:24px;height:24px;font-size:11.5px}
+}
+/* ---------- G2 : thèmes, types, croquis ---------- */
+:root{--c-ind:#B4530A; --c-agri:#4D7C0F; --c-serv:#BE185D; --k-def:#0F766E; --k-rep:#A15C07; --k-conn:#1D4ED8; --k-comp:#7C3AED}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-ind:#FB923C; --c-agri:#A3E635; --c-serv:#F472B6; --k-def:#2DD4BF; --k-rep:#F0B429; --k-conn:#7EA6FF; --k-comp:#B794F6}}
+:root[data-theme="dark"]{--c-ind:#FB923C; --c-agri:#A3E635; --c-serv:#F472B6; --k-def:#2DD4BF; --k-rep:#F0B429; --k-conn:#7EA6FF; --k-comp:#B794F6}
+.stepn{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:17px;margin-right:10px;vertical-align:2px}
+.need-msg{margin:-2px 0 10px;padding:10px 14px;border-radius:10px;border:1.5px dashed var(--mid);background:var(--card);background:color-mix(in srgb,var(--mid) 8%,var(--card));font-weight:700;font-size:15px;display:flex;gap:8px;align-items:center}
+.themes.big{grid-template-columns:repeat(3,1fr)}
+@media (max-width:640px){.themes.big{grid-template-columns:1fr}}
+.themes.big .theme{padding:14px;gap:7px}
+.th-ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:var(--c);background:var(--card);background:color-mix(in srgb,var(--c) 12%,var(--card))}
+.theme[aria-pressed="true"] .th-ico{background:var(--c);color:var(--card)}
+.themes.big .th-name{font-family:var(--f-display);font-weight:800;font-size:21px;text-transform:uppercase;letter-spacing:.01em;line-height:1.05}
+.th-sub{font-size:13px;color:var(--ink-2);line-height:1.3}
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:640px){.types{grid-template-columns:1fr}}
+.ty{--c:var(--accent);display:flex;align-items:center;gap:8px;text-align:left;background:var(--card);border:2px solid var(--c);border-radius:10px;padding:10px 12px;font-weight:700;font-size:14px;line-height:1.2;color:var(--ink-2);touch-action:manipulation}
+.ty svg{flex:none;color:var(--c)}
+.ty span{flex:1}
+.ty b{font-family:var(--f-mono);font-size:12px;font-weight:600;color:var(--ink-2);background:var(--paper);border-radius:999px;padding:1px 8px}
+.ty[aria-pressed="true"]{border-style:solid;color:var(--ink);box-shadow:inset 0 0 0 1px var(--c),0 2px 8px -4px var(--c);background:var(--card);background:color-mix(in srgb,var(--c) 8%,var(--card))}
+.ty[aria-pressed="false"]{background:var(--card);color:var(--ink-2)}
+.ty[aria-pressed="false"] span:not(.tchk){opacity:.7}
+.ty[aria-pressed="false"] .tchk{border-color:var(--c);background:var(--card)}
+.modes.off .mode:not(.exam){opacity:.55}
+.small-warn{font-size:12.5px!important;color:var(--mid)!important}
+.h3s{font-family:var(--f-display);text-transform:uppercase;font-size:20px;margin-bottom:8px}
+.seg.cats{flex-wrap:wrap}
+.idea .seg.cats button{min-width:0;padding:6px 12px;font-size:13.5px}
+.why.okw{color:var(--ok)!important}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:8px}
+.cols b{display:block;font-family:var(--f-display);font-size:18px;text-transform:uppercase}
+.cols ul{margin:4px 0 0;padding-left:18px;font-size:14px}
+.ev .yr{font-weight:500;color:var(--ok)}
+.ev .n svg{width:16px;height:16px}
+.crq-title{display:flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:800;font-size:20px;text-transform:uppercase;color:var(--c);margin:0 0 10px}
+.pick{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.pk-img{aspect-ratio:1250/930}
+.pk-txt b{font-size:19px}
+.lbl.ttl{font-style:italic;border-style:dashed;font-weight:700}
+.slot .lbl.ttl{border-style:solid}
+.t-reg{--pc:#18202C}
+.mtag.t-reg{text-transform:uppercase;letter-spacing:.03em;font-size:clamp(9px,1.9cqw,13px)}
+.mtag.above{transform:translate(-50%,-125%)}
+.pin.t-reg{border-radius:6px}
+.lbl.t-reg{text-transform:uppercase;letter-spacing:.03em;font-size:12.5px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lbl.t-reg{--pc:var(--ink)}}
+.listh{margin:14px 0 6px;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.bh{margin:6px 0 0;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.leg .eqt{width:70px;color:var(--ink)}
+.sch{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+@media (max-width:720px){.sch{grid-template-columns:1fr}.sch-draw{max-width:560px}}
+.badge-strip .medal{width:84px}
+.mtag.below{transform:translate(-50%,25%)}
+.tchk{flex:none!important;width:20px;height:20px;border-radius:5px;border:2px solid var(--line);display:grid;place-items:center}
+.ty[aria-pressed="true"] .tchk{background:var(--c);border-color:var(--c)}
+.ty[aria-pressed="true"] .tchk::after{content:"";width:10px;height:5px;border-left:2.5px solid var(--card);border-bottom:2.5px solid var(--card);transform:rotate(-45deg) translate(1px,-1px)}
+.t-ville{--pc:#C0261A} .t-drom{--pc:#18202C}
+.pin.t-drom{border-radius:6px;border-style:dashed}
+.lbl.t-ville{--pc:#C0261A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lbl.t-drom{--pc:var(--ink)}}
+.subj .ev{border-left:6px solid var(--c)}
+.mtag.t-drom{transform:translate(-14px,-50%)}
+
+</style>
+</head>
+<body>
+<script>
+/* Adresse du récepteur Google Sheets (statistiques anonymes) */
+window.G2_STATS_URL = "https://script.google.com/macros/s/AKfycbyyIpY59EXu05C_mLzop50w94Vpw6fELQXTQHtWFP5DZQ3N7KXNg0njtVo8RPXj_DIG/exec";
+</script>
+<main class="wrap" id="app" aria-live="polite"></main>
+<noscript><p style="padding:16px">Active JavaScript pour utiliser l'application de révision.</p></noscript>
+<script>
+/* =========================================================
+   CONTENU DU CHAPITRE G2 — à modifier ici
+   ========================================================= */
+const THEMES = {
+  ind:  {label:"Les espaces industriels", short:"Industrie",   color:"var(--c-ind)",  icon:"factory", sub:"Des espaces industriels en mutation"},
+  agri: {label:"Les espaces agricoles",   short:"Agriculture", color:"var(--c-agri)", icon:"wheat",   sub:"Des espaces inégalement intégrés et modernisés"},
+  serv: {label:"Les espaces de services", short:"Services",    color:"var(--c-serv)", icon:"bag",     sub:"Une forte concentration des services"}
+};
+const TYPES = {
+  def:  {label:"Définitions",                short:"Définition",   color:"var(--k-def)",  icon:"book"},
+  rep:  {label:"Repères : lieux et chiffres", short:"Repère",       color:"var(--k-rep)",  icon:"pin"},
+  conn: {label:"Connaissances du cours",      short:"Connaissance", color:"var(--k-conn)", icon:"bulb"}
+};
+
+/* t = thème, k = type, q = question, a = réponse, d = corrigé détaillé, p = pour aller plus loin,
+   s = bonne réponse courte (QCM), x = 3 mauvaises réponses (QCM),
+   aj = contenu ajouté (hors cours et fiche) : à garder ou à supprimer */
+const CARDS = [
+/* ================= ESPACES INDUSTRIELS ================= */
+{id:"i_d1",t:"ind",k:"def",q:"Définissez : <b>espace productif</b>",a:"Espace aménagé et mis en valeur pour une activité économique (industrielle, agricole ou de services).",d:"C'est la notion clé du chapitre : il y a des espaces productifs <b>industriels</b>, <b>agricoles</b> et <b>de services</b>.",
+ s:"Espace aménagé et mis en valeur pour une activité économique",x:["Espace naturel protégé où l'on ne peut pas construire","Espace où vivent la majorité des habitants d'une ville","Région qui a perdu ses usines"]},
+{id:"i_d2",t:"ind",k:"def",q:"Définissez : <b>activité industrielle</b>",a:"Activité économique qui transforme des matières (industrie lourde, textile, agroalimentaire…).",
+ s:"Activité économique qui transforme des matières",x:["Activité économique sans transformation de matière","Activité qui consiste à cultiver la terre","Activité qui accueille les touristes"]},
+{id:"i_d3",t:"ind",k:"def",q:"Définissez : <b>désindustrialisation</b>",a:"Diminution ou disparition de l'activité industrielle dans une région.",d:"Exemple : le Nord-Est (sidérurgie, textile), où beaucoup d'usines ont fermé.",
+ s:"Diminution ou disparition de l'activité industrielle dans une région",x:["Transfert d'une usine vers un pays étranger","Création de nouvelles usines de haute technologie","Changement des activités pour lutter contre le chômage"]},
+{id:"i_d4",t:"ind",k:"def",q:"Définissez : <b>délocalisation</b>",a:"Transfert d'une production industrielle vers des pays étrangers aux coûts moins importants (main-d'œuvre moins chère).",
+ s:"Transfert d'une production industrielle vers des pays étrangers aux coûts moins importants",x:["Diminution de l'activité industrielle dans une région","Installation d'une usine étrangère en France","Changement des activités économiques d'une région"]},
+{id:"i_d5",t:"ind",k:"def",q:"Définissez : <b>reconversion</b>",a:"Changement des activités économiques d'une région pour résoudre la crise et diminuer le chômage.",d:"Exemples : le Nord transformé en zone de services, l'usine de batteries Verkor à Dunkerque.",
+ s:"Changement des activités économiques d'une région pour résoudre la crise",x:["Fermeture définitive de toutes les usines d'une région","Transfert d'une production vers l'étranger","Agrandissement d'un port de commerce"]},
+{id:"i_d6",t:"ind",k:"def",q:"Définissez : <b>technopole</b>",a:"Métropole ayant une forte concentration d'activités de haute technologie.",d:"Exemples : Toulouse, Grenoble.",
+ s:"Métropole ayant une forte concentration d'activités de haute technologie",x:["Ancienne ville minière en déclin","Grand port avec des usines","Village spécialisé dans une production agricole"]},
+{id:"i_d7",t:"ind",k:"def",q:"Définissez : <b>pôle de compétitivité</b>",a:"Entreprises, universités et laboratoires réunis sur un même territoire.",d:"Ils travaillent ensemble pour innover. Exemple : la Cosmetic Valley autour de Chartres.",
+ s:"Entreprises, universités et laboratoires réunis sur un même territoire",x:["Zone commerciale à la sortie d'une ville","Ensemble d'usines fermées en reconversion","Groupe de fermes qui vendent en circuit court"]},
+{id:"i_d8",t:"ind",k:"def",q:"Que signifie <b>ZIP</b> ?",a:"Zone industrialo-portuaire : des usines installées autour d'un grand port.",d:"Exemple : Marseille – Fos-sur-Mer. Les usines reçoivent et expédient leurs produits par la mer.",
+ s:"Zone industrialo-portuaire : des usines installées autour d'un port",x:["Zone d'innovation et de production","Zone industrielle protégée","Zone interdite aux poids lourds"]},
+{id:"i_d9",t:"ind",k:"def",q:"Que veut dire <b>héliotropisme</b> ?",a:"L'attirance des habitants et des entreprises pour les régions ensoleillées.",d:"C'est l'un des nouveaux critères de localisation : un <b>cadre de vie agréable</b>, souvent dans le Sud.",
+ s:"L'attirance pour les régions ensoleillées",x:["L'attirance pour les grandes villes du Nord","La production d'énergie solaire","L'installation des usines près des mines"]},
+
+{id:"i_r1",t:"ind",k:"rep",q:"Quelles sont les <b>deux principales régions industrielles</b> françaises ?",a:"L'Île-de-France et l'Auvergne-Rhône-Alpes.",d:"Autour de <b>Paris</b> et de <b>Lyon</b> (avec Grenoble).",p:"Exemple : la Cosmetic Valley s'étend autour de Paris, jusqu'au Centre-Val de Loire et à la Normandie.",
+ s:"L'Île-de-France et l'Auvergne-Rhône-Alpes",x:["Les Hauts-de-France et le Grand Est","La Bretagne et la Normandie","La Corse et l'Occitanie"]},
+{id:"i_r2",t:"ind",k:"rep",q:"Quelle industrie de haute technologie est associée à <b>Toulouse</b> ?",a:"L'aéronautique (Airbus).",s:"L'aéronautique (Airbus)",x:["Les nanotechnologies","Les paquebots","Les parfums et cosmétiques"]},
+{id:"i_r3",t:"ind",k:"rep",q:"Quelle industrie de haute technologie est associée à <b>Grenoble</b> ?",a:"Les nanotechnologies.",s:"Les nanotechnologies",x:["L'aéronautique","La sidérurgie","Les paquebots"]},
+{id:"i_r4",t:"ind",k:"rep",q:"Où se trouve la <b>Cosmetic Valley</b> (parfums et cosmétiques) ?",a:"Autour de Chartres (de Paris au Centre-Val de Loire et à la Normandie).",s:"Autour de Chartres",x:["Autour de Grenoble","Autour de Florange","Autour de Toulouse"]},
+{id:"i_r5",t:"ind",k:"rep",q:"Donnez l'exemple de <b>ZIP</b> (zone industrialo-portuaire) du cours.",a:"Marseille – Fos-sur-Mer.",s:"Marseille – Fos-sur-Mer",x:["Grenoble","Florange","Chartres"]},
+{id:"i_r6",t:"ind",k:"rep",q:"Que fabriquent les <b>Chantiers de l'Atlantique</b> à Saint-Nazaire ?",a:"Des paquebots.",d:"C'est un exemple de l'essor des littoraux de l'Ouest.",s:"Des paquebots",x:["Des avions","Des batteries","Des parfums"]},
+{id:"i_r7",t:"ind",k:"rep",q:"<b>Florange</b>, en Lorraine : quel exemple illustre-t-il ?",a:"La désindustrialisation du Nord-Est (sidérurgie).",s:"La désindustrialisation du Nord-Est (sidérurgie)",x:["L'essor de l'aéronautique","Une zone industrialo-portuaire","Un pôle de compétitivité de cosmétiques"]},
+{id:"i_r8",t:"ind",k:"rep",q:"Donnez un exemple de <b>reconversion</b> d'un espace industriel.",a:"L'usine de batteries Verkor à Dunkerque.",d:"Une région de vieilles industries accueille une industrie d'avenir (batteries pour voitures électriques).",s:"L'usine de batteries Verkor",x:["Les Chantiers de l'Atlantique","Airbus","La Cosmetic Valley"]},
+{id:"i_r9",t:"ind",k:"rep",q:"Citez des exemples de <b>métropoles avec de la haute technologie</b>.",a:"Rennes · Nantes · Bordeaux · Toulouse · Grenoble · Marseille.",p:"Astuce : elles sont presque toutes à l'Ouest et au Sud. Placez-les sur le croquis pour les retenir."},
+{id:"i_r10",t:"ind",k:"rep",q:"Quelles étaient les industries des <b>vieilles régions industrielles</b> du Nord-Est ?",a:"La sidérurgie et le textile.",s:"La sidérurgie et le textile",x:["L'aéronautique et l'espace","Les nanotechnologies","Les parfums et cosmétiques"]},
+
+{id:"i_c1",t:"ind",k:"conn",q:"Pourquoi les <b>littoraux</b> attirent-ils les industries ?",a:"Ils profitent du commerce international : on y crée des ZIP (zones industrialo-portuaires).",d:"Exemple : Marseille – Fos-sur-Mer.",
+ s:"Ils profitent du commerce international (ZIP)",x:["Parce qu'il y a des mines de charbon","Parce que la main-d'œuvre y est la moins qualifiée","Parce qu'il n'y a pas de transports"]},
+{id:"i_c2",t:"ind",k:"conn",q:"Qu'accueillent les <b>grandes métropoles</b> ?",a:"Les industries de haute technologie et les pôles de compétitivité.",d:"Exemples : Toulouse (aéronautique), Grenoble (nanotechnologies), Chartres (Cosmetic Valley).",
+ s:"Les industries de haute technologie et les pôles de compétitivité",x:["Surtout la sidérurgie et le textile","Les usines les plus anciennes","Aucune industrie"]},
+{id:"i_c3",t:"ind",k:"conn",q:"Pourquoi des usines ont-elles <b>fermé</b> dans le Nord-Est ?",a:"À cause des délocalisations et de la concurrence étrangère.",d:"C'est la <b>désindustrialisation</b>. Ces régions tentent des <b>reconversions</b>.",
+ s:"À cause des délocalisations et de la concurrence étrangère",x:["Parce qu'il fait trop froid","À cause du tourisme","Parce que les ports sont trop grands"]},
+{id:"i_c4",t:"ind",k:"conn",q:"Citez les <b>3 nouveaux critères de localisation</b> des industries.",a:"Une main-d'œuvre qualifiée, des transports diversifiés reliés à l'Europe et au monde, un cadre de vie agréable.",d:"<ul><li>main-d'œuvre qualifiée : universités, écoles supérieures ;</li><li>transports : aéroports, LGV ;</li><li>cadre de vie : héliotropisme.</li></ul>",
+ s:"Main-d'œuvre qualifiée, transports rapides, cadre de vie agréable",x:["Mines de charbon, fer et fleuves","Main-d'œuvre peu chère, pas de transports, climat froid","Terres agricoles, forêts et montagnes"]},
+{id:"i_c5",t:"ind",k:"conn",q:"Pourquoi une entreprise de haute technologie s'installe-t-elle près d'<b>universités</b> ?",a:"Pour trouver une main-d'œuvre qualifiée (ingénieurs, chercheurs).",
+ s:"Pour trouver une main-d'œuvre qualifiée",x:["Pour avoir des salaires plus bas","Pour être près des mines","Pour profiter des touristes"]},
+{id:"i_c6",t:"ind",k:"conn",q:"Quelles régions connaissent un <b>essor</b> industriel ?",a:"Les métropoles et les littoraux de l'Ouest et du Sud.",d:"Grâce à la haute technologie et au commerce international. Exemples : Airbus à Toulouse, les Chantiers de l'Atlantique à Saint-Nazaire.",
+ s:"Les métropoles et les littoraux de l'Ouest et du Sud",x:["Les vieilles régions du Nord-Est","Les montagnes du Massif central","Les campagnes isolées"]},
+{id:"i_c7",t:"ind",k:"conn",q:"Quel est l'effet de la <b>mondialisation</b> sur les espaces industriels ?",a:"Ils se transforment : certains sont en essor (haute technologie, littoraux), d'autres en déclin (délocalisation), comme le Nord-Est.",
+ s:"Ils se transforment : certains en essor, d'autres en déclin",x:["Ils ne changent pas","Toutes les usines ferment","Toutes les régions se développent pareil"]},
+
+{id:"i_k1",t:"ind",k:"conn",q:"Comparez : <b>délocalisation</b> et <b>désindustrialisation</b>.",a:"La délocalisation est le départ d'une usine vers l'étranger ; la désindustrialisation est la baisse de l'industrie dans une région.",d:"Les délocalisations sont une <b>cause</b> de la désindustrialisation.",
+ s:"Délocalisation = départ d'une usine à l'étranger ; désindustrialisation = baisse de l'industrie dans la région",x:["Ce sont deux mots pour la même chose","La désindustrialisation est une cause des délocalisations vers la France","Délocalisation = création d'usines ; désindustrialisation = fermeture"]},
+{id:"i_k2",t:"ind",k:"conn",q:"Comparez le <b>Nord-Est</b> et le <b>Sud-Ouest</b> industriels.",a:"Le Nord-Est est en crise (vieilles industries, désindustrialisation) ; le Sud-Ouest est en essor (haute technologie, comme l'aéronautique à Toulouse).",
+ s:"Nord-Est en crise (vieilles industries) ; Sud-Ouest en essor (haute technologie)",x:["Nord-Est en essor ; Sud-Ouest en crise","Les deux sont en crise","Les deux sont des régions sans industrie"]},
+{id:"i_k4",t:"ind",k:"conn",q:"Où s'installaient les usines <b>autrefois</b>, et où s'installent-elles <b>aujourd'hui</b> ?",a:"Autrefois près des matières premières (mines de charbon et de fer du Nord-Est). Aujourd'hui près des universités, des transports rapides et dans un cadre de vie agréable (Ouest, Sud).",aj:1,
+ s:"Autrefois près des mines ; aujourd'hui près des universités, des transports et du soleil",x:["Autrefois près des universités ; aujourd'hui près des mines","Toujours au même endroit","Autrefois à la montagne ; aujourd'hui à la campagne"]},
+{id:"i_k5",t:"ind",k:"conn",q:"Comparez : <b>technopole</b> et <b>pôle de compétitivité</b>.",a:"Une technopole est une métropole qui concentre la haute technologie ; un pôle de compétitivité réunit entreprises, universités et laboratoires sur un territoire.",d:"Une technopole accueille souvent un ou plusieurs pôles de compétitivité.",
+ s:"Technopole = métropole de haute technologie ; pôle = entreprises, universités et labos réunis",x:["Technopole = zone commerciale ; pôle = port","Ce sont deux mots pour la même chose","Technopole = vieille ville industrielle ; pôle = village"]},
+
+/* ================= ESPACES AGRICOLES ================= */
+{id:"a_d1",t:"agri",k:"def",q:"Définissez : <b>agriculture productiviste</b>",a:"Agriculture commerciale qui recherche une production maximale et des rendements élevés en utilisant les techniques les plus efficaces.",d:"Engrais chimiques, pesticides, irrigation, mécanisation.",
+ s:"Agriculture commerciale qui recherche une production maximale et des rendements élevés",x:["Agriculture sans engrais chimiques ni pesticides","Agriculture qui nourrit seulement la famille de l'agriculteur","Agriculture de montagne peu modernisée"]},
+{id:"a_d2",t:"agri",k:"def",q:"Définissez : <b>filière agroalimentaire</b>",a:"Ensemble des activités qui interviennent dans la réalisation d'un produit fini dans le domaine agricole.",d:"Du champ à l'assiette : production, transformation (usine), transport, vente.",
+ s:"Ensemble des activités qui permettent de réaliser un produit fini agricole",x:["Ensemble des fermes d'une région","Un label de qualité","Un marché de producteurs"]},
+{id:"a_d4",t:"agri",k:"def",aj:1,q:"Que veut dire <b>élevage hors-sol</b> ?",a:"Élevage d'animaux (porcs, volailles) enfermés dans des bâtiments et nourris avec des aliments achetés.",d:"Les animaux ne vont pas dans les champs. Exemple : la Bretagne.",
+ s:"Élevage d'animaux enfermés dans des bâtiments et nourris avec des aliments achetés",x:["Élevage en plein air dans les montagnes","Élevage de poissons en mer","Culture de plantes sans terre"]},
+{id:"a_d5",t:"agri",k:"def",aj:1,q:"Qu'est-ce qu'un <b>circuit court</b> ?",a:"Une vente directe du producteur au consommateur, avec au maximum un intermédiaire.",d:"Exemples : vente à la ferme, marché, AMAP.",
+ s:"Une vente directe du producteur au consommateur",x:["Une vente en grande surface après export","Un petit champ au bord d'une route","Une course de tracteurs"]},
+{id:"a_d6",t:"agri",k:"def",aj:1,q:"Qu'est-ce que l'<b>agriculture biologique</b> ?",a:"Une agriculture qui n'utilise ni engrais chimiques ni pesticides de synthèse.",d:"Elle occupe environ 10 % des surfaces agricoles. Label : AB.",
+ s:"Une agriculture sans engrais chimiques ni pesticides de synthèse",x:["Une agriculture qui utilise le plus d'engrais possible","Une agriculture uniquement en montagne","Une agriculture qui produit de l'énergie"]},
+{id:"a_d7",t:"agri",k:"def",aj:1,q:"À quoi sert un <b>label de qualité</b> (AB, AOP, Label Rouge) ?",a:"À garantir au consommateur l'origine ou la qualité d'un produit.",d:"Exemples : le Comté (AOP) dans le Jura, le champagne à Reims.",
+ s:"À garantir l'origine ou la qualité d'un produit",x:["À indiquer le prix le plus bas","À montrer que le produit vient de l'étranger","À autoriser l'élevage hors-sol"]},
+
+{id:"a_r1",t:"agri",k:"rep",q:"Où se trouvent les <b>grandes plaines céréalières</b> ?",a:"Dans le Bassin parisien (la Beauce).",d:"Céréales (blé, maïs) et betteraves sur de très grandes exploitations.",
+ s:"Dans le Bassin parisien (la Beauce)",x:["En Bretagne","Dans le Massif central","Dans les Alpes"]},
+{id:"a_r2",t:"agri",k:"rep",q:"Quelle région est spécialisée dans l'<b>élevage intensif</b> ?",a:"La Bretagne.",d:"Élevages hors-sol de porcs et de volailles, production de lait.",
+ s:"La Bretagne",x:["La Beauce","La Champagne","Le Massif central"]},
+{id:"a_r3",t:"agri",k:"rep",q:"Citez des régions de <b>cultures spécialisées</b> (vignes, fruits).",a:"La Champagne, le Bordelais, la Bourgogne, le Languedoc et les régions méditerranéennes.",d:"Des produits de grande valeur, souvent vendus à l'étranger.",
+ s:"La Champagne, le Bordelais, le Languedoc",x:["La Beauce, la Picardie, la Brie","La Bretagne, la Normandie, la Vendée","Le Massif central, les Alpes, les Pyrénées"]},
+{id:"a_r4",t:"agri",k:"rep",q:"Donnez des exemples d'<b>espaces agricoles à l'écart</b>.",a:"Les zones d'élevage de montagne : le Massif central, les Alpes, les Pyrénées.",
+ s:"Le Massif central, les Alpes, les Pyrénées",x:["La Beauce et le Bassin parisien","La Bretagne","Le Bordelais et la Champagne"]},
+{id:"a_r5",t:"agri",k:"rep",q:"Que cultive-t-on dans les <b>DROM</b> ?",a:"Des cultures tropicales.",p:"Par exemple la banane et la canne à sucre aux Antilles et à La Réunion.",
+ s:"Des cultures tropicales",x:["Du blé et des betteraves","Des vignes de champagne","Rien : il n'y a pas d'agriculture"]},
+{id:"a_r6",t:"agri",k:"rep",q:"Quelle part des surfaces agricoles est cultivée en <b>bio</b> ?",a:"Environ 10 %.",s:"Environ 10 %",x:["Environ 50 %","Environ 90 %","Moins de 1 %"]},
+{id:"a_r8",t:"agri",k:"rep",q:"Donnez deux exemples de <b>produits sous label</b>.",a:"Le Comté dans le Jura et le champagne à Reims.",
+ s:"Le Comté (Jura) et le champagne (Reims)",x:["Le blé de la Beauce et le maïs","Les porcs bretons et les poulets hors-sol","Les bananes et les céréales de Picardie"]},
+{id:"a_r9",t:"agri",k:"rep",q:"Où trouve-t-on les <b>algues vertes</b>, signe de pollution agricole ?",a:"En Bretagne.",d:"Elles sont dues aux nitrates venus des élevages intensifs et des engrais.",s:"En Bretagne",x:["Dans les Alpes","En Beauce","En Corse"]},
+
+{id:"a_c2",t:"agri",k:"conn",q:"Quelles <b>techniques</b> utilise l'agriculture productiviste ?",a:"Engrais chimiques, pesticides, élevages hors-sol, irrigation et forte mécanisation.",
+ s:"Engrais, pesticides, hors-sol, irrigation, mécanisation",x:["Uniquement le travail à la main","Labels, circuits courts et bio","Aucune technique moderne"]},
+{id:"a_c3",t:"agri",k:"conn",q:"Quel est le <b>but</b> de l'agriculture productiviste ?",a:"Obtenir de hauts rendements pour l'industrie agroalimentaire et l'exportation.",d:"Exemple : les céréales de Picardie exportées par le port de Rouen.",
+ s:"De hauts rendements pour l'agroalimentaire et l'exportation",x:["Nourrir seulement la famille de l'agriculteur","Protéger les paysages de montagne","Attirer des touristes"]},
+{id:"a_c4",t:"agri",k:"conn",q:"Pourquoi les zones de montagne sont-elles <b>à l'écart</b> ?",a:"Elles sont moins modernisées et moins intégrées à la mondialisation.",d:"L'élevage de montagne y est souvent peu rentable.",p:"Le relief et les pentes rendent la mécanisation difficile.",
+ s:"Elles sont moins modernisées et moins intégrées à la mondialisation",x:["Elles produisent trop de céréales","Elles ont trop d'élevages hors-sol","Elles exportent tout par le port de Rouen"]},
+{id:"a_c5",t:"agri",k:"conn",q:"Pourquoi parle-t-on d'une <b>agriculture en crise</b> ?",a:"Pollution des sols et des eaux, surexploitation des sols, crises sanitaires, surendettement des agriculteurs, concurrence étrangère.",d:"Exemples : algues vertes en Bretagne, grippe aviaire, concurrence de l'Espagne et du Brésil.",
+ s:"Pollution, crises sanitaires, endettement, concurrence étrangère",x:["Il n'y a plus assez de tracteurs","Les touristes ne viennent plus","Les usines de batteries ont fermé"]},
+{id:"a_c6",t:"agri",k:"conn",q:"Quels <b>nouveaux modèles agricoles</b> se développent ?",a:"L'agriculture biologique, les labels de qualité (AB, AOP, Label Rouge) et les circuits courts.",
+ s:"Le bio, les labels de qualité, les circuits courts",x:["Plus d'engrais et de pesticides","Plus d'élevages hors-sol","L'abandon de toutes les fermes"]},
+{id:"a_c7",t:"agri",k:"conn",q:"Quelles <b>nouvelles productions</b> réalisent les agriculteurs ?",a:"De l'énergie : méthanisation, panneaux solaires, éoliennes.",
+ s:"De l'énergie : méthanisation, panneaux solaires, éoliennes",x:["Des avions et des paquebots","Des parfums et des cosmétiques","Des services bancaires"]},
+{id:"a_c8",t:"agri",k:"conn",q:"Que produisent les régions de <b>cultures spécialisées</b> ?",a:"Des vignes, des fruits et des légumes de grande valeur, souvent vendus à l'étranger.",
+ s:"Vignes, fruits et légumes de grande valeur",x:["Du blé et des betteraves en grande quantité","Des porcs et des volailles hors-sol","Des moutons dans les montagnes"]},
+
+{id:"a_k1",t:"agri",k:"conn",q:"Comparez l'agriculture de la <b>Beauce</b> et celle du <b>Massif central</b>.",a:"Beauce : agriculture productiviste de céréales, sur de grandes exploitations, intégrée à la mondialisation. Massif central : élevage de montagne moins modernisé, à l'écart.",
+ s:"Beauce : céréales productivistes, intégrée ; Massif central : élevage de montagne, à l'écart",x:["Beauce : élevage de montagne ; Massif central : céréales","Les deux sont à l'écart de la mondialisation","Les deux sont des régions de vignobles"]},
+{id:"a_k2",t:"agri",k:"conn",q:"Comparez l'agriculture <b>productiviste</b> et l'agriculture <b>biologique</b>.",a:"La productiviste utilise engrais et pesticides pour produire le plus possible ; la bio s'en passe pour protéger l'environnement et la santé, mais produit moins.",
+ s:"Productiviste : engrais et pesticides pour produire plus ; bio : sans produits chimiques",x:["Productiviste : sans produits chimiques ; bio : avec engrais","Les deux utilisent le plus d'engrais possible","Ce sont deux mots pour la même chose"]},
+{id:"a_k3",t:"agri",k:"conn",q:"L'élevage intensif <b>breton</b> : une réussite ou un problème ?",a:"Les deux : il produit beaucoup (porcs, volailles, lait) et nourrit l'industrie agroalimentaire, mais il pollue (algues vertes).",
+ s:"Les deux : très productif, mais polluant (algues vertes)",x:["Seulement une réussite, sans aucun problème","Seulement un problème : il ne produit rien","Ni l'un ni l'autre : il a disparu"]},
+
+/* ================= ESPACES DE SERVICES ================= */
+{id:"s_d1",t:"serv",k:"def",q:"Définissez : <b>activité de services</b>",a:"Activité économique sans transformation de matière (commerce, restauration, tourisme…).",
+ s:"Activité économique sans transformation de matière",x:["Activité économique qui transforme des matières","Activité qui consiste à cultiver la terre","Activité qui extrait du charbon"]},
+{id:"s_d2",t:"serv",k:"def",q:"Définissez : <b>surtourisme</b>",a:"Trop de touristes au même endroit et au même moment (foule, saturation, usure des sites).",
+ s:"Trop de touristes au même endroit et au même moment",x:["L'absence totale de touristes","Le tourisme réservé aux personnes riches","Le tourisme à la campagne"]},
+{id:"s_d3",t:"serv",k:"def",q:"Définissez : <b>métropole</b>",a:"Grande ville qui concentre la population et les activités, et qui exerce une influence sur les territoires alentours.",d:"Les services s'y concentrent. Paris est un pôle mondial.",
+ s:"Grande ville qui concentre population et activités et influence les alentours",x:["Petite commune rurale","Zone commerciale en périphérie","Station de ski"]},
+{id:"s_d6",t:"serv",k:"def",q:"Qu'est-ce qu'un <b>conflit d'usage</b> ?",a:"Une opposition entre plusieurs acteurs qui veulent utiliser le même espace pour des activités différentes.",d:"Exemple : le tourisme et l'agriculture qui se disputent les terres.",
+ s:"Opposition entre acteurs qui veulent utiliser le même espace différemment",x:["Une dispute entre deux touristes","Un accident de la route","Un désaccord sur le prix d'un hôtel"]},
+
+{id:"s_r1",t:"serv",k:"rep",q:"Quelle part des emplois en France sont des <b>services</b> (2024) ?",a:"Plus des trois quarts : 76,6 %.",s:"76,6 %",x:["26,6 %","46,6 %","96,6 %"]},
+{id:"s_r2",t:"serv",k:"rep",q:"Combien de <b>touristes internationaux</b> la France a-t-elle accueillis en 2025 ?",a:"102 millions.",d:"La France est la 1re destination touristique mondiale.",s:"102 millions",x:["12 millions","52 millions","500 millions"]},
+{id:"s_r3",t:"serv",k:"rep",q:"Quel est le <b>rang</b> de la France parmi les destinations touristiques mondiales ?",a:"La 1re destination touristique mondiale.",s:"1re",x:["5e","10e","20e"]},
+{id:"s_r4",t:"serv",k:"rep",q:"Quel est le grand <b>quartier d'affaires de Paris</b> ?",a:"La Défense.",s:"La Défense",x:["La Part-Dieu","Le Vieux-Port","La Beauce"]},
+{id:"s_r5",t:"serv",k:"rep",q:"Citez des <b>espaces touristiques</b> français.",a:"Le littoral atlantique, le littoral méditerranéen, les Alpes (et Paris).",
+ s:"Littoral atlantique, littoral méditerranéen, Alpes",x:["La Beauce, la Picardie, la Brie","Le Nord-Est et la Lorraine","Le Massif central uniquement"]},
+{id:"s_r7",t:"serv",k:"rep",q:"Citez les <b>métropoles</b> de services.",a:"Paris (pôle mondial) · Lille · Strasbourg · Rennes · Nantes · Bordeaux · Lyon · Toulouse · Marseille · Nice."},
+{id:"s_r8",t:"serv",k:"rep",q:"Où se trouvent les <b>principaux aéroports internationaux</b> ?",a:"Paris (deux aéroports), Lyon et Nice.",p:"À Paris : Roissy-Charles-de-Gaulle et Orly.",
+ s:"Paris, Lyon et Nice",x:["Lille, Rennes et Brest","Grenoble, Florange et Chartres","Clermont-Ferrand et Limoges"]},
+
+{id:"s_c1",t:"serv",k:"conn",q:"Que trouve-t-on dans les <b>métropoles</b> ?",a:"Les fonctions de commandement (quartiers d'affaires, lieux de pouvoir), les commerces, les banques, les restaurants, les établissements scolaires.",
+ s:"Quartiers d'affaires, lieux de pouvoir, commerces, banques, écoles",x:["Surtout des champs de céréales","Surtout des élevages hors-sol","Surtout des usines fermées"]},
+{id:"s_c2",t:"serv",k:"conn",q:"Que trouve-t-on dans les <b>périphéries</b> des villes ?",a:"Les zones commerciales et les pôles de compétitivité.",
+ s:"Les zones commerciales et les pôles de compétitivité",x:["Les lieux de pouvoir et les ministères","Le centre historique et les musées","Les plages et les stations de ski"]},
+{id:"s_c4",t:"serv",k:"conn",q:"Citez les <b>3 atouts</b> touristiques de la France.",a:"Un patrimoine culturel et historique important, un patrimoine naturel varié, des infrastructures de transport.",p:"Exemples : le Louvre et le Mont-Saint-Michel ; la mer, la montagne et la campagne ; les TGV et les aéroports.",
+ s:"Patrimoine culturel, patrimoine naturel varié, transports",x:["Le froid, les usines, les mines","Les prix bas, la pollution, le surtourisme","Les zones commerciales uniquement"]},
+{id:"s_c5",t:"serv",k:"conn",q:"Citez des <b>limites</b> du tourisme.",a:"Pression sur l'environnement, conflits d'usage, surtourisme, tourisme concentré sur quelques espaces (inégalités), hausse des prix des logements.",
+ s:"Pollution, surtourisme, inégalités, hausse des prix des logements",x:["Trop peu de touristes partout","La baisse du prix des logements","La disparition des transports"]},
+{id:"s_c7",t:"serv",k:"conn",q:"Où le tourisme est-il <b>concentré</b> ? Quelle conséquence ?",a:"Sur quelques espaces (Paris, les littoraux, les montagnes), ce qui crée des inégalités entre territoires.",
+ s:"À Paris, sur les littoraux et en montagne : des inégalités entre territoires",x:["Partout de façon égale : aucune inégalité","Uniquement dans le Nord-Est","Uniquement dans les DROM"]},
+
+{id:"s_k1",t:"serv",k:"conn",q:"Comparez les services du <b>centre des métropoles</b> et ceux des <b>périphéries</b>.",a:"Au centre : fonctions de commandement, banques, commerces, restaurants, écoles. En périphérie : zones commerciales et pôles de compétitivité.",
+ s:"Centre : commandement, banques, commerces ; périphérie : zones commerciales, pôles de compétitivité",x:["Centre : zones commerciales ; périphérie : ministères","Il n'y a pas de services en périphérie","Centre et périphérie ont exactement les mêmes services"]},
+{id:"s_k2",t:"serv",k:"conn",q:"Comparez <b>activité industrielle</b> et <b>activité de services</b>.",a:"L'activité industrielle transforme des matières ; l'activité de services ne transforme pas de matière (commerce, tourisme, banque…).",
+ s:"Industrie : transforme des matières ; services : sans transformation de matière",x:["Industrie : sans transformation ; services : transforment des matières","Ce sont deux mots pour la même chose","Les services produisent des céréales"]},
+{id:"s_k3",t:"serv",k:"conn",q:"Le tourisme sur le <b>littoral</b> : atout ou problème ?",a:"Les deux : il apporte des emplois et des revenus grâce au patrimoine naturel, mais il provoque surtourisme, pollution et hausse des prix des logements.",
+ s:"Les deux : emplois et revenus, mais surtourisme et pollution",x:["Seulement un atout, sans aucun problème","Seulement un problème : il n'apporte rien","Ni l'un ni l'autre"]}
+];
+
+/* ================= ÉVALUATION BLANCHE : NOTIONS CLÉS =================
+   15 questions : 5 par thème. Pour chaque groupe, on tire n cartes au hasard dans la liste. */
+const EXAM_KEYS = {
+  ind:  [{n:1, from:["i_d1"]},                                            // espace productif : toujours
+         {n:2, from:["i_d2","i_d3","i_d4","i_d5","i_d6","i_d7"]},         // définitions clés
+         {n:2, from:["i_r1","i_c3","i_c4","i_c6","i_k1","i_r7"]}],        // pôles, désindustrialisation, critères de localisation
+  agri: [{n:2, from:["a_d1","a_d2"]},                                     // agriculture productiviste, filière agroalimentaire
+         {n:3, from:["a_r1","a_r2","a_r4","a_c2","a_c3","a_c5","a_c6","a_k1"]}],
+  serv: [{n:2, from:["s_d1","s_d2","s_d3"]},                              // activité de services, surtourisme, métropole
+         {n:3, from:["s_r1","s_r2","s_c1","s_c2","s_c4","s_c5"]}]
+};
+
+/* ================= SUJETS POSSIBLES (plans de développement construit) =================
+   g = numéro du sujet (0, 1, 2) ; label = espace productif choisi ; th = thèmes nécessaires */
+const SUBJECTS = [
+  "Montrez que la mondialisation transforme les espaces productifs français en prenant un des 3 espaces productifs",
+  "Décrivez et expliquez le fonctionnement et les dynamiques d'un espace productif français face à la mondialisation",
+  "Montrez la diversité des espaces productifs et leurs évolutions"
+];
+const PLANS = [
+/* ----- Sujet 1 : la mondialisation transforme un espace productif ----- */
+{g:0,th:["ind"],label:"Les espaces industriels",
+ intro:"Avec la mondialisation, les espaces industriels français se transforment. Comment certains en profitent-ils, alors que d'autres sont fragilisés ?",
+ parts:["Des espaces industriels qui profitent de la mondialisation","Des espaces industriels fragilisés qui se transforment"],
+ ideas:[
+  {t:"Les littoraux profitent du commerce international : les ZIP (Marseille – Fos-sur-Mer)",p:0},
+  {t:"Les métropoles accueillent la haute technologie : Airbus à Toulouse, les nanotechnologies à Grenoble",p:0},
+  {t:"Les Chantiers de l'Atlantique à Saint-Nazaire exportent des paquebots",p:0},
+  {t:"Nouveaux critères de localisation : main-d'œuvre qualifiée, transports rapides, héliotropisme",p:0},
+  {t:"Le Nord-Est (sidérurgie, textile) subit la désindustrialisation",p:1},
+  {t:"Délocalisations et concurrence étrangère font fermer des usines (Florange)",p:1},
+  {t:"Des reconversions : l'usine de batteries Verkor à Dunkerque",p:1},
+  {t:"La France accueille 102 millions de touristes internationaux",p:-1,w:"c'est le tourisme (services), pas l'industrie."}
+ ],
+ concl:"La mondialisation crée des gagnants (métropoles, littoraux de l'Ouest et du Sud) et des perdants (le Nord-Est), qui cherchent à se reconvertir."},
+{g:0,th:["agri"],label:"Les espaces agricoles",
+ intro:"La mondialisation et la PAC ont modernisé l'agriculture française. Comment transforment-elles les espaces agricoles ?",
+ parts:["Une agriculture modernisée et intégrée à la mondialisation","Une agriculture en crise qui cherche de nouveaux modèles"],
+ ideas:[
+  {t:"Une agriculture productiviste : engrais, pesticides, irrigation, mécanisation",p:0},
+  {t:"Les grandes plaines céréalières du Bassin parisien (Beauce) exportent leurs céréales (port de Rouen)",p:0},
+  {t:"L'élevage intensif hors-sol de la Bretagne fournit l'industrie agroalimentaire",p:0},
+  {t:"Les cultures spécialisées (Champagne, Bordelais) vendent à l'étranger",p:0},
+  {t:"Des espaces à l'écart : l'élevage de montagne (Massif central, Alpes, Pyrénées)",p:1},
+  {t:"Une crise : pollution (algues vertes), crises sanitaires, concurrence de l'Espagne et du Brésil",p:1},
+  {t:"De nouveaux modèles : bio, labels (AOP, Label Rouge), circuits courts, production d'énergie",p:1},
+  {t:"Airbus fabrique des avions à Toulouse",p:-1,w:"c'est un exemple industriel, pas agricole."}
+ ],
+ concl:"La mondialisation a modernisé l'agriculture, mais de façon inégale. Face à la crise, de nouveaux modèles agricoles se développent."},
+{g:0,th:["serv"],label:"Les espaces de services",
+ intro:"Les services regroupent plus des trois quarts des emplois (76,6 % en 2024). Comment la mondialisation transforme-t-elle leurs espaces ?",
+ parts:["Les services se concentrent dans les métropoles","Le tourisme, un secteur mondialisé"],
+ ideas:[
+  {t:"Les métropoles concentrent les fonctions de commandement (La Défense à Paris)",p:0},
+  {t:"Paris est un pôle mondial ; les autres métropoles (Lyon, Lille, Toulouse…) attirent aussi les services",p:0},
+  {t:"Les périphéries accueillent zones commerciales et pôles de compétitivité",p:0},
+  {t:"La France est la 1re destination touristique mondiale : 102 millions de touristes en 2025",p:1},
+  {t:"Des atouts : patrimoine culturel, patrimoine naturel varié, transports (TGV, aéroports)",p:1},
+  {t:"Des limites : surtourisme, pression sur l'environnement, hausse des prix des logements",p:1},
+  {t:"Le Massif central est un espace agricole à l'écart",p:-1,w:"c'est l'agriculture, pas les services."}
+ ],
+ concl:"Avec la mondialisation, les services se concentrent dans les métropoles et le tourisme attire le monde entier, avec des atouts mais aussi des limites."},
+
+/* ----- Sujet 2 : fonctionnement et dynamiques d'UN espace productif (études de cas vues en classe) ----- */
+{g:1,th:["ind"],label:"Un espace industriel : la Cosmetic Valley",
+ intro:"La Cosmetic Valley est un pôle de compétitivité de la parfumerie et de la cosmétique, dont la capitale est Chartres. Comment fonctionne cet espace productif et comment évolue-t-il face à la mondialisation ?",
+ parts:["Le fonctionnement de l'espace productif","Les dynamiques face à la mondialisation"],
+ ideas:[
+  {t:"Un pôle de compétitivité autour de Chartres, sur trois régions : Centre-Val de Loire, Normandie, Île-de-France",p:0},
+  {t:"Un réseau d'acteurs : grandes marques de luxe, PME, centres de recherche et universités partenaires",p:0},
+  {t:"Une filière complète : en amont l'agriculture (plantes, pavots de Beauce) et la recherche, au centre la fabrication (usine Gemey), en aval la logistique et le marketing",p:0},
+  {t:"Un espace bien relié : autoroutes, aéroports de Roissy et d'Orly, pôle multimodal en projet à Chartres",p:0},
+  {t:"L'innovation fait la renommée internationale des produits (les Météorites de Guerlain)",p:1},
+  {t:"Le 1er centre mondial de la parfumerie-cosmétique : 53 % du chiffre d'affaires de la filière française",p:1},
+  {t:"La France est le 1er exportateur mondial de parfums et cosmétiques ; le marché mondial grandit d'environ 5 % par an",p:1},
+  {t:"Les usines de sidérurgie de Florange ont fermé",p:-1,w:"c'est la désindustrialisation du Nord-Est, pas la Cosmetic Valley."}
+ ],
+ concl:"La Cosmetic Valley est un espace industriel dynamique : l'innovation et la coopération entre entreprises, recherche et formation en font un gagnant de la mondialisation."},
+{g:1,th:["agri"],label:"Un espace agricole : la Champagne",
+ intro:"La Champagne est un grand vignoble en AOP, autour de Reims et d'Épernay. Comment fonctionne cet espace agricole et comment évolue-t-il face à la mondialisation ?",
+ parts:["Le fonctionnement de l'espace productif","Les dynamiques face à la mondialisation"],
+ ideas:[
+  {t:"Un vignoble en AOP « Champagne » autour de Reims, d'Épernay, de la Côte des Blancs et de la Côte des Bar",p:0},
+  {t:"Une agriculture productiviste : grandes exploitations (81 % de la surface cultivée) et forte mécanisation",p:0},
+  {t:"Une filière complète : matériel et tonnellerie en amont, pressurage et mise en bouteille, puis stockage, transport et négoce en aval",p:0},
+  {t:"Des acteurs puissants : 300 maisons de négoce et de grands groupes comme LVMH ou Vranken-Pommery",p:0},
+  {t:"Un espace intégré à la mondialisation : 244 millions de bouteilles, dont 54 % exportées (Royaume-Uni, États-Unis, Japon…)",p:1},
+  {t:"Un produit de prestige : 1re production AOC viticole mondiale, sur seulement 0,5 % du vignoble mondial",p:1},
+  {t:"Les coteaux, maisons et caves de Champagne sont inscrits au patrimoine mondial de l'UNESCO",p:1},
+  {t:"La région Grand Est mise sur l'innovation, l'export et l'œnotourisme",p:1},
+  {t:"L'élevage hors-sol de porcs en Bretagne",p:-1,w:"c'est un autre espace agricole, pas la Champagne."}
+ ],
+ concl:"La Champagne est un espace agricole productiviste et très intégré à la mondialisation : son vin de prestige, protégé par l'AOP, est vendu dans le monde entier."},
+{g:1,th:["serv"],label:"Un espace de services : Lille et le tourisme européen",
+ intro:"La métropole européenne de Lille s'est transformée grâce au tourisme urbain. Comment fonctionne cet espace de services et comment évolue-t-il face à la mondialisation ?",
+ parts:["Le fonctionnement de l'espace productif","Les dynamiques face à la mondialisation"],
+ ideas:[
+  {t:"La métropole européenne de Lille : 95 communes, 1,2 million d'habitants, 12 500 emplois touristiques",p:0},
+  {t:"Un carrefour européen : LGV (Paris en 1 h, Londres en 1 h 20, Bruxelles en 35 min), autoroutes, aéroport",p:0},
+  {t:"Un riche patrimoine : musées (Palais des Beaux-Arts, La Piscine à Roubaix, LaM)",p:0},
+  {t:"Un tourisme urbain varié : culture, gastronomie, événements, shopping, courts séjours (city breaks)",p:0},
+  {t:"Capitale européenne de la culture en 2004, puis les saisons de lille3000 (Eldorado : plus de 2,5 millions de visiteurs)",p:1},
+  {t:"La reconversion d'anciens sites industriels : La Piscine, ancienne usine textile devenue musée",p:1},
+  {t:"Un rayonnement international : 2e ville la plus « instagrammée » de France",p:1},
+  {t:"Des limites : peu de grandes entreprises attirées, une transformation qui profite surtout aux plus aisés",p:1},
+  {t:"La Cosmetic Valley autour de Chartres",p:-1,w:"c'est un espace industriel, pas le tourisme à Lille."}
+ ],
+ concl:"Lille, ancienne ville industrielle, est devenue une métropole touristique européenne grâce à la culture et aux transports, même si cette transformation a des limites."},
+
+/* ----- Sujet 3 : la diversité des espaces productifs ----- */
+{g:2,th:["ind","agri","serv"],label:"Tout le chapitre",
+ intro:"Un espace productif est un espace aménagé pour une activité économique. Quels sont les espaces productifs français et comment évoluent-ils avec la mondialisation ?",
+ parts:["Des espaces industriels en mutation","Des espaces agricoles inégalement intégrés","Une forte concentration des services"],
+ ideas:[
+  {t:"Essor des métropoles et des littoraux de l'Ouest et du Sud (haute technologie, ZIP)",p:0},
+  {t:"Déclin du Nord-Est : désindustrialisation, puis reconversions",p:0},
+  {t:"Agriculture productiviste du Bassin parisien et de la Bretagne",p:1},
+  {t:"Espaces à l'écart en montagne ; nouveaux modèles (bio, labels, circuits courts)",p:1},
+  {t:"Les métropoles concentrent les services : 76,6 % des emplois",p:2},
+  {t:"Le tourisme : 1re destination mondiale, avec des atouts et des limites",p:2},
+  {t:"La Première Guerre mondiale a détruit le Nord-Est",p:-1,w:"c'est de l'histoire : cela ne décrit pas les espaces productifs actuels."}
+ ],
+ concl:"Les espaces productifs français sont divers et se transforment avec la mondialisation : certains sont dynamiques et intégrés, d'autres en crise ou à l'écart."}
+];
+const ROMAN = ["I","II","III"];
+
+/* ================= CROQUIS À COMPLÉTER =================
+   Étape 1 : titre et légende (glisser chaque nom à côté du bon figuré)
+   Étape 2 : les lieux à savoir placer (x, y dans le repère du croquis) */
+const SW = c => `<span class="sw" style="background:${c}"></span>`;
+const DOTF = (c, big) => `<svg viewBox="0 0 46 18"><circle cx="23" cy="9" r="${big ? 7 : 5.5}" fill="${c}"/></svg>`;
+const TRIF = `<svg viewBox="0 0 46 18"><path d="M23 2 30 15H16z" fill="#18202C"/></svg>`;
+const ARR = c => `<svg viewBox="0 0 46 18"><path d="M5 9h34" stroke="${c}" stroke-width="2.6"/><path d="M35 4l6 5-6 5" fill="none" stroke="${c}" stroke-width="2.6" stroke-linejoin="round"/></svg>`;
+const CROQ_LEG = {
+ ind:{
+  groups:["I. Des espaces industrialisés et mondialisés","II. Des espaces industriels en crise"],
+  slots:[
+   {g:0,fig:SW("#7A2E3A"),ans:"Principales régions industrielles",e:"<b>Principales régions industrielles</b> (bordeaux) : l'Île-de-France et la région de Lyon – Grenoble."},
+   {g:0,fig:SW("#E9A23B"),ans:"Espaces dynamiques (haute technologie)",e:"<b>Espaces dynamiques</b> (orange) : l'Ouest, le Sud, les littoraux et l'Alsace, grâce à la haute technologie et au commerce international."},
+   {g:0,fig:DOTF("#111"),ans:"Métropoles attractives",e:"<b>Métropoles attractives</b> (point noir) : elles accueillent la haute technologie et les pôles de compétitivité."},
+   {g:1,fig:SW("#9B7BC0"),ans:"Anciennes régions industrielles en reconversion",e:"<b>Anciennes régions industrielles</b> (violet) : le Nord et la Lorraine, touchés par la désindustrialisation, cherchent des reconversions."},
+   {g:1,fig:SW("#BDBDBD"),ans:"Espaces peu industrialisés",e:"<b>Espaces peu industrialisés</b> (gris) : le centre du pays, les montagnes, la Corse et les DROM."}
+  ]},
+ agri:{
+  groups:["I. Des espaces agricoles intégrés et modernisés","II. Des espaces agricoles à l'écart"],
+  slots:[
+   {g:0,fig:SW("#F2D649"),ans:"Grandes cultures céréalières",e:"<b>Grandes cultures céréalières</b> (jaune) : le Bassin parisien (Beauce) et le Sud-Ouest."},
+   {g:0,fig:SW("#8B4A2B"),ans:"Élevage intensif",e:"<b>Élevage intensif</b> (marron) : l'Ouest, surtout la Bretagne (porcs, volailles, lait)."},
+   {g:0,fig:SW("#6B4FA0"),ans:"Cultures spécialisées (vins, fruits, cultures tropicales)",e:"<b>Cultures spécialisées</b> (violet) : Champagne, Alsace, Val de Loire, Bordelais, Bourgogne, vallée du Rhône, régions méditerranéennes et DROM."},
+   {g:0,fig:ARR("#D7263D"),ans:"Exportations",e:"<b>Exportations</b> (flèche rouge vers l'extérieur) : par les grands ports (Rouen, Nantes – Saint-Nazaire, Marseille)."},
+   {g:0,fig:ARR("#2546B8"),ans:"Importations",e:"<b>Importations</b> (flèche bleue vers la France) : la France achète aussi des produits agricoles à l'étranger."},
+   {g:1,fig:SW("#79B85F"),ans:"Agriculture peu rentable (élevage de montagne, polyculture)",e:"<b>Agriculture peu rentable</b> (vert) : élevage de montagne et polyculture (Massif central, Alpes, Pyrénées, Corse)."}
+  ]},
+ serv:{
+  groups:["I. Les espaces de services","II. Les facteurs de localisation"],
+  slots:[
+   {g:0,fig:SW("#E8A0AE"),ans:"Espaces touristiques",e:"<b>Espaces touristiques</b> (rose) : Paris, les littoraux, les Alpes, la Corse et les DROM."},
+   {g:0,fig:DOTF("#6B6B6B"),ans:"Métropoles (quartiers d'affaires, pôles de compétitivité, zones commerciales)",e:"<b>Métropoles</b> (point gris) : elles concentrent les services. Paris (gros point) est un pôle mondial."},
+   {g:1,fig:ARR("#18202C"),ans:"Principaux axes de communication",e:"<b>Principaux axes de communication</b> (flèches noires) : autoroutes et LGV, souvent en étoile autour de Paris."},
+   {g:1,fig:TRIF,ans:"Principaux aéroports internationaux",e:"<b>Principaux aéroports internationaux</b> (triangles) : Paris (Roissy et Orly), Lyon, Nice."}
+  ]}
+};
+/* Lieux à placer, par étape (k : ville = point rouge, reg = région en capitales, drom = DROM ; b = étiquette sous le point) */
+const METRO10 = ["Paris","Lille","Strasbourg","Rennes","Nantes","Bordeaux","Lyon","Toulouse","Marseille","Nice"];
+const DROM_PL = [{n:"Guyane",at:[-46,142],k:"drom"},{n:"Guadeloupe",at:[-46,292],k:"drom"},{n:"Martinique",at:[-46,466],k:"drom"},{n:"La Réunion",at:[-46,638],k:"drom"},{n:"Mayotte",at:[-46,826],k:"drom"}]; // à droite de chaque forme, pour la laisser entièrement visible
+const CROQ_PLACES = {
+ ind:[
+  {label:"Métropoles", items:["Paris","Lyon","Grenoble","Toulouse","Bordeaux","Nantes","Rennes","Marseille","Nice","Lille","Strasbourg"].map(n => ({n, k:"ville"}))},
+  {label:"DROM", items:DROM_PL}],
+ agri:[
+  {label:"Régions agricoles", items:[{n:"Bassin parisien",at:[505,232]},{n:"Champagne",at:[655,290]},{n:"Bretagne",at:[150,310]},{n:"Bordelais",at:[300,605]},
+       {n:"Bourgogne",at:[652,445]},{n:"Massif central",at:[520,620]},{n:"Alpes",at:[770,610]},{n:"Pyrénées",at:[380,835]}].map(p => Object.assign(p, {k:"reg"}))},
+  {label:"Métropoles", items:METRO10.map(n => ({n, k:"ville"}))},
+  {label:"DROM", items:DROM_PL}],
+ serv:[
+  {label:"Métropoles", items:METRO10.map(n => ({n, k:"ville"}))},
+  {label:"Espaces touristiques", items:[{n:"Littoral atlantique",at:[205,560],k:"reg"},{n:"Littoral méditerranéen",at:[640,830],k:"reg"},{n:"Alpes",at:[790,600],k:"reg"}]},
+  {label:"DROM", items:DROM_PL}]
+};
+
+const BADGES = [
+  {id:"first",   name:"Premières fiches",     desc:"Réviser 10 cartes.",                                  icon:"card"},
+  {id:"streak5", name:"En série",             desc:"5 bonnes réponses d'affilée.",                        icon:"bolt"},
+  {id:"comeback",name:"Persévérant",          desc:"Réussir 5 cartes que vous aviez ratées.",               icon:"loop"},
+  {id:"m_ind",   name:"Ingénieur",            desc:"Maîtriser 80 % des cartes sur les espaces industriels.",icon:"factory"},
+  {id:"m_agri",  name:"Agronome",             desc:"Maîtriser 80 % des cartes sur les espaces agricoles.",  icon:"wheat"},
+  {id:"m_serv",  name:"Guide touristique",    desc:"Maîtriser 80 % des cartes sur les espaces de services.",icon:"bag"},
+  {id:"geo",     name:"Cartographe",          desc:"Compléter un croquis sans aucune erreur.",            icon:"map"},
+  {id:"ready",   name:"Prêt pour l'évaluation",desc:"Avoir 16/20 ou plus à l'évaluation blanche.",        icon:"check"}
+];
+const LEVELS = [
+  [0,"Je découvre le chapitre"],[.15,"Apprenti géographe"],[.45,"Presque prêt"],
+  [.70,"Prêt pour l'évaluation"],[.90,"Expert du chapitre"],[.999,"Légende du G2"]
+];
+
+const GEO_FR = "M504,62L506,70L509,73L509,75L507,78L508,82L508,84L509,87L514,88L518,95L525,98L529,93L538,90L540,90L543,96L545,97L546,100L546,102L548,114L553,118L560,115L561,115L561,118L568,119L570,121L571,133L573,135L577,131L582,131L585,133L592,131L597,135L599,139L600,139L601,138L603,138L604,140L601,143L599,151L603,151L604,157L600,161L600,165L604,167L609,166L618,169L620,168L631,163L633,154L640,147L641,148L644,149L643,154L643,153L641,156L639,166L644,170L642,175L643,181L645,182L651,181L657,185L663,191L668,190L671,193L671,197L672,197L673,196L677,198L681,204L681,208L682,208L686,205L690,206L692,203L696,204L698,202L701,203L704,207L709,208L711,212L719,211L720,208L725,206L729,207L734,210L738,209L744,211L746,215L749,218L749,219L748,219L748,221L753,226L756,232L757,231L758,236L765,237L766,236L766,231L770,231L776,233L776,237L779,240L781,237L786,239L793,240L794,237L796,237L797,234L801,233L801,234L805,235L805,237L807,240L809,242L813,243L815,245L821,245L824,243L829,244L833,244L843,248L850,250L844,264L841,266L840,269L837,270L837,273L831,279L828,283L829,292L827,295L825,303L826,309L823,312L823,318L818,325L817,331L817,336L820,341L820,344L818,347L818,350L817,352L817,356L815,362L816,367L815,369L816,372L820,378L820,380L814,384L815,386L814,387L814,389L813,390L810,390L811,393L809,395L804,395L799,397L795,395L795,391L784,390L782,391L783,394L782,396L779,397L779,399L778,400L776,404L785,402L787,405L787,406L782,410L782,414L769,426L769,428L766,430L765,436L761,439L751,443L750,447L752,450L750,456L751,461L741,469L732,478L734,481L729,488L729,492L728,493L734,498L731,509L724,512L723,514L724,517L723,520L727,519L733,519L735,518L743,509L743,507L740,507L739,503L742,497L744,495L750,494L755,490L764,488L774,490L775,492L773,498L778,505L775,513L776,518L782,520L781,522L781,525L782,526L784,525L785,525L790,530L793,537L788,543L783,544L783,546L781,545L779,546L778,551L779,556L782,560L790,563L790,568L792,575L798,579L800,582L804,584L800,592L801,598L798,603L796,601L792,603L789,607L786,608L787,610L785,611L778,609L771,612L769,614L771,617L772,621L777,622L778,630L779,632L786,636L790,636L795,637L797,639L796,642L801,652L796,651L794,652L793,656L794,658L787,667L789,672L793,676L790,678L790,682L798,693L802,693L820,701L823,703L838,699L841,697L843,697L842,700L845,703L846,707L844,710L842,714L834,725L833,727L835,733L831,738L829,736L828,737L824,744L819,744L816,748L815,747L812,747L811,752L812,757L811,758L808,756L805,759L804,758L800,759L799,762L799,763L796,770L794,770L794,769L793,771L788,772L786,771L785,772L784,777L781,778L776,785L783,785L781,788L782,791L778,794L776,793L773,794L771,797L764,797L761,800L762,803L760,803L755,800L751,801L747,803L747,807L749,807L749,808L743,809L746,807L744,804L738,805L738,803L732,802L732,800L728,801L730,804L733,805L728,806L727,808L722,805L724,803L724,803L722,802L721,801L716,799L714,796L711,795L710,798L707,797L704,793L693,794L692,793L693,788L691,782L688,781L684,783L670,783L668,779L669,776L671,775L679,774L683,769L682,767L678,769L677,769L674,764L671,764L669,762L668,768L671,770L672,772L671,774L667,776L663,773L659,775L657,777L659,780L661,780L658,783L656,779L651,775L650,773L650,766L647,761L649,765L650,775L656,780L655,782L653,782L640,781L638,780L640,776L639,775L634,772L627,773L612,772L608,770L607,768L608,765L607,764L603,764L596,765L582,777L574,781L567,790L558,789L553,791L549,795L540,806L535,821L536,825L535,851L535,858L538,859L541,860L544,869L538,869L535,868L534,866L527,865L525,867L522,868L517,871L511,871L507,875L509,878L501,876L498,879L495,878L492,873L489,873L482,869L476,871L472,870L467,876L463,876L460,875L458,868L454,867L449,864L443,863L444,857L447,856L443,854L444,852L436,851L431,848L427,848L426,852L424,853L420,844L418,843L418,842L405,842L401,836L394,835L391,833L389,834L382,830L376,828L373,828L371,830L370,835L371,836L370,837L372,840L370,843L353,842L350,839L345,844L343,840L338,838L323,841L318,838L316,834L315,831L310,831L310,830L305,826L303,828L302,827L297,830L290,829L290,831L287,832L287,829L285,829L282,824L276,821L275,815L262,814L257,810L251,808L249,808L238,801L238,799L240,798L238,797L236,799L234,805L229,804L226,800L232,792L233,785L231,783L228,783L224,781L221,781L220,783L219,784L217,783L217,779L215,778L210,779L209,776L206,774L207,770L208,771L216,769L221,766L229,753L241,713L246,687L250,668L249,663L254,653L260,655L264,653L263,649L256,643L252,649L249,656L256,611L259,596L262,577L264,571L265,570L267,569L268,575L276,581L285,593L287,610L292,620L297,625L298,633L299,634L298,629L299,626L298,624L295,622L299,622L302,625L300,621L295,619L291,615L288,590L284,579L266,561L262,559L259,556L256,556L257,548L261,547L263,547L268,554L272,556L264,547L263,541L268,537L267,534L269,533L266,528L268,529L270,526L268,524L267,520L265,518L266,517L264,516L264,515L261,514L260,513L262,511L263,508L267,505L267,501L266,499L263,499L261,500L261,503L259,502L257,499L252,496L246,496L244,490L243,489L235,487L235,485L231,484L227,481L225,477L225,481L224,481L223,471L218,462L215,461L210,452L206,449L205,442L208,440L208,439L211,437L215,430L213,424L209,422L200,419L205,417L206,407L208,406L215,405L219,407L222,407L222,408L221,409L228,413L233,414L229,413L222,406L216,403L207,403L203,407L198,409L196,408L193,405L190,405L190,407L188,406L182,403L182,402L186,404L189,403L186,399L185,401L184,397L181,395L187,392L189,393L189,394L192,392L189,391L189,390L186,388L186,385L194,384L191,384L185,382L178,383L178,382L180,381L181,379L178,380L179,381L176,380L175,383L173,382L165,383L163,379L160,377L163,377L164,379L165,378L166,379L167,377L169,379L171,379L175,374L175,372L174,370L174,372L173,373L174,373L173,374L170,371L172,372L171,371L169,370L170,370L165,371L164,373L160,374L161,372L159,373L160,370L158,369L157,367L157,373L159,376L156,373L155,375L154,372L154,374L152,374L150,375L148,374L149,373L147,372L147,380L149,384L146,383L145,381L147,376L146,372L143,368L144,364L149,363L149,360L147,361L148,358L147,359L144,358L146,362L143,363L144,364L142,367L139,364L134,362L138,363L137,362L134,361L139,354L136,357L132,358L133,360L128,361L123,353L118,353L116,351L112,351L111,349L108,351L104,350L102,345L97,340L96,339L96,341L94,344L93,344L95,343L92,344L88,341L87,337L86,339L88,342L85,343L84,341L83,341L83,344L85,345L83,347L80,348L71,346L71,344L73,344L73,341L72,336L69,330L63,325L60,327L59,325L51,322L53,320L54,320L74,318L79,319L80,316L79,311L75,308L74,307L73,307L70,305L68,305L64,310L63,311L64,303L59,302L59,300L63,300L64,296L66,296L65,299L66,300L72,300L75,302L82,301L80,302L82,302L87,301L84,300L84,299L83,300L82,299L78,299L82,295L79,296L79,295L78,296L77,296L75,297L73,297L74,296L71,297L75,292L82,289L62,295L56,293L55,295L52,294L51,291L52,291L52,290L51,285L52,282L54,282L52,280L55,275L56,274L57,274L58,273L61,273L65,274L64,271L68,272L67,271L66,269L76,268L75,267L80,265L82,266L83,267L82,269L86,268L89,269L88,268L91,265L97,265L98,266L98,264L104,263L104,270L108,268L107,269L110,273L110,268L111,269L112,266L113,263L115,265L118,265L121,267L124,267L124,269L127,269L128,269L128,265L131,264L128,259L130,258L132,255L138,257L137,258L139,259L148,256L150,253L151,255L150,261L155,255L159,254L159,258L156,264L160,259L163,259L163,260L161,262L168,265L166,268L173,275L174,281L180,285L178,287L181,290L182,287L185,287L189,283L196,279L194,277L197,277L198,277L199,278L200,278L205,274L207,276L204,280L205,281L209,278L211,285L212,284L212,282L213,285L214,284L213,283L214,282L216,283L215,280L221,279L224,285L223,286L225,290L224,292L227,291L225,289L225,285L227,287L224,284L222,280L225,276L228,276L228,275L234,274L234,276L233,281L234,283L237,283L246,283L250,282L255,283L262,281L264,282L261,280L258,280L258,278L255,277L254,274L252,272L252,265L250,262L251,261L252,256L254,255L253,252L254,246L256,246L254,245L252,247L251,246L252,241L251,239L251,236L253,235L252,235L251,228L252,227L255,227L251,226L250,228L248,222L249,221L246,217L247,217L247,215L245,216L242,213L242,212L240,212L240,206L236,198L239,195L240,190L238,186L233,184L234,180L240,181L241,183L253,186L254,188L256,187L260,187L262,184L266,183L275,185L276,191L274,195L272,195L271,197L274,204L279,211L278,217L280,216L281,218L283,217L283,215L285,213L293,214L300,217L314,219L317,218L320,220L325,220L336,226L338,225L350,222L360,215L375,212L380,208L376,211L371,211L359,209L355,205L362,188L387,174L392,173L397,173L425,164L439,151L444,142L446,142L451,145L453,145L451,143L452,142L450,142L448,139L445,136L445,130L447,127L449,128L446,125L447,121L448,113L449,111L448,109L447,99L450,89L448,81L453,79L457,75L468,70L481,68L492,64L496,65L504,62ZM462,868L463,867L461,864L459,867L462,868ZM917,876L917,875L915,874L915,873L925,870L920,866L919,866L921,864L919,863L915,864L915,861L915,860L918,860L919,857L922,855L923,851L921,851L922,848L925,846L924,841L925,842L926,842L929,843L930,842L931,840L931,838L945,833L947,832L947,830L951,825L959,825L964,829L967,822L966,817L963,814L965,811L964,808L966,805L964,800L966,797L970,797L973,799L973,801L975,813L974,832L977,837L979,838L977,834L981,838L983,850L982,856L985,863L986,877L985,881L976,896L978,919L976,922L977,922L977,925L975,925L975,927L971,927L971,929L972,930L975,929L976,929L975,932L970,936L971,942L967,944L968,946L967,948L970,946L968,951L966,951L959,949L961,946L957,943L958,941L955,944L955,942L953,943L952,942L948,942L941,939L941,937L937,936L937,934L936,933L937,928L938,929L942,927L945,922L936,922L935,921L935,919L929,920L929,919L926,919L930,917L930,915L930,913L935,911L932,909L935,908L934,907L935,903L932,901L922,905L922,904L922,902L920,899L925,897L925,894L930,891L930,890L927,885L924,886L923,884L919,883L919,882L917,881L919,880L917,880L918,878L917,876ZM259,534L258,535L261,538L260,545L259,546L258,546L256,540L249,531L247,523L251,525L255,529L257,529L259,534ZM256,514L246,509L243,509L238,504L242,503L244,505L244,506L242,505L242,507L248,506L247,507L248,508L254,509L257,514L256,514ZM191,456L195,460L189,459L189,456L191,456ZM201,433L205,436L205,441L202,436L200,435L198,435L198,434L196,429L199,429L202,430L201,433ZM146,397L149,398L149,400L147,401L139,398L138,397L137,392L139,391L146,397ZM35,280L36,281L32,282L31,283L32,281L30,281L33,279L35,280ZM753,809L754,810L754,811L751,812L748,812L753,809Z";
+const GEO_MED = "M835,734L828,737L816,749L811,753L808,756L800,759L796,770L794,771L785,772L776,786L783,792L773,794L762,800L756,801L748,808L744,809L739,805L733,800L734,805L722,806L722,802L714,797L707,798L692,794L688,781L668,779L680,774L679,769L671,764L671,770L668,776L658,777L658,783L650,773L649,766L656,783L639,781L635,773L609,770L607,764L582,778L559,790L540,806L535,851L542,861L538,870";
+const GEO_ATL = "M215,779L207,775L216,770L241,713L250,664L264,654L252,650L260,597L266,570L276,582L292,620L299,634L298,625L302,625L292,615L266,562L256,556L263,548L264,548L268,534L269,529L268,520L264,516L261,513L268,506L264,499L259,503L246,497L235,488L227,482L225,481L216,461L206,443L211,437L210,422L206,408L220,408L221,409L230,413L207,404L196,409L190,407L182,402L186,399L182,395L190,395L190,390L195,385L179,383L182,379L176,381L166,383L164,377L167,379L172,379L174,371L175,374L172,372L170,371L161,374L160,370L158,373L155,375L153,374L150,374L150,384L147,376L144,365L148,361L145,359L144,364L134,362L134,361L133,359L124,354L113,351L104,350L96,340L93,344L89,341L88,342L84,342L83,347L72,344L72,337L61,327L54,320L79,319L76,309L70,305L63,311L60,301L66,296L72,301L81,302L84,301L82,299L79,297L77,296L74,296L82,289L56,295L52,291L53,283L55,276L58,274L64,272L67,269L81,266L83,270L89,268L98,267L104,270L111,273L112,266L119,266L124,269L128,265L131,258L138,259L150,254L156,255L156,265L164,261L167,268L180,285L182,287L196,279L199,278L205,274L205,281L212,284L214,285L216,283L224,286L225,293L225,286L223,280L228,276L233,281L246,284L262,282L259,281L255,275L250,263L254,255L257,246L252,246L252,237L252,229L251,227L249,222L247,215L243,212L237,198L238,186L241,181L254,188L263,184L277,192L272,198L278,217L283,218L293,214L317,219L337,227L360,215L376,211L355,206L392,173L440,151L452,146L453,142L445,137L450,128L448,113L447,100L453,80L481,68L504,62L504,62";
+const PLACES = {"Grenoble":[712,610],"Rouen":[417,214],"Reims":[595,232],"Dunkerque":[496,67],"Florange":[722,223],"Fos":[664,774],"Saint-Nazaire":[203,408],"Chartres":[439,307],"Beauce":[449,326],"Bretagne":[166,323],"Champagne":[600,256],"Bordelais":[311,630],"Bourgogne":[647,433],"Languedoc":[553,765],"Alsace":[805,314],"MassifCentral":[526,602],"Alpes":[762,606],"Pyrenees":[368,828],"Jura":[718,477],"Picardie":[508,178],"Normandie":[355,244],"Vosges":[775,335],"Limousin":[442,554],"Brest":[69,292],"LeHavre":[357,208],"Metz":[726,241],"Clermont":[538,557],"Perpignan":[525,845],"Biarritz":[223,763],"Brive":[436,614],"Avignon":[654,726],"Dijon":[661,412],"Tours":[387,405],"Orleans":[464,359],"Lorient":[133,358],"LaRochelle":[265,515],"Chamonix":[784,538],"Valence":[657,635],"Lens":[522,124],"Mulhouse":[804,366],"Caen":[327,236],"Poitiers":[362,480],"Limoges":[420,551],"Pau":[303,784],"Lille":[536,105],"Paris":[492,270],"Strasbourg":[825,287],"Rennes":[241,331],"Nantes":[244,415],"Lyon":[652,558],"Bordeaux":[296,639],"Toulouse":[427,759],"Nice":[820,743],"Marseille":[693,786]};
+
+/* ================= CROQUIS (fonds de carte dessinés en SVG) =================
+   Repère : mêmes coordonnées que la carte de G1 (France métropolitaine de x 50 à 990, y 60 à 950).
+   Une colonne de DROM est ajoutée à gauche, comme sur les croquis du cours. */
+const VB = {x:-240, y:36, w:1250, h:930};
+const toPct = (x, y) => [((x - VB.x) / VB.w * 100).toFixed(2), ((y - VB.y) / VB.h * 100).toFixed(2)];
+
+const DROM = [
+  {n:"Guyane",     d:"M-170,95 L-118,88 L-92,118 L-98,168 L-128,196 L-160,186 L-176,140Z"},
+  {n:"Guadeloupe", d:"M-170,270 L-140,258 L-132,282 L-112,262 L-92,276 L-110,300 L-134,296 L-146,322 L-166,304Z"},
+  {n:"Martinique", d:"M-158,428 L-132,440 L-120,468 L-104,492 L-122,500 L-142,478 L-160,456Z"},
+  {n:"La Réunion", d:"M-166,620 L-132,600 L-102,612 L-94,646 L-118,672 L-152,670 L-170,648Z"},
+  {n:"Mayotte",    d:"M-150,786 L-124,792 L-128,820 L-112,846 L-130,866 L-144,840 L-156,812Z"}
+];
+
+/* Zones de chaque croquis (dessinées dans l'ordre, découpées par le contour de la France) */
+const CRQ = {
+ agri: {
+  title:"Les espaces productifs agricoles en France",
+  base:"#79B85F", drom:"#6B4FA0",
+  zones:[
+   {c:"#F2D649", d:"M400,40 L730,40 L730,290 L690,350 L680,460 L600,480 L500,478 L440,510 L385,560 L360,610 L400,690 L480,722 L520,780 L430,800 L320,790 L248,782 L228,700 L246,560 L262,470 L330,410 L390,320 L420,220Z"},
+   {c:"#8B4A2B", d:"M0,140 L415,150 L430,225 L392,300 L352,365 L318,425 L272,474 L0,490Z"},
+   {c:"#6B4FA0", e:[600,240,48,30,-10]},
+   {c:"#6B4FA0", e:[818,325,20,62,8]},
+   {c:"#6B4FA0", e:[300,605,38,58,-18]},
+   {c:"#6B4FA0", s:"M262,420 Q360,370 470,360", w:30},
+   {c:"#6B4FA0", s:"M650,405 L650,560 L660,720", w:40},
+   {c:"#6B4FA0", s:"M520,845 L585,770 L650,735 L700,780 L790,742", w:56}
+  ],
+  arrows:[
+   {x:385,y:225,a:-102},{x:262,y:468,a:180},{x:684,y:762,a:98}
+  ]
+ },
+ ind: {
+  title:"Les espaces industriels en France",
+  base:"#BDBDBD", drom:"#BDBDBD",
+  zones:[
+   {c:"#E9A23B", d:"M0,240 L282,232 L330,330 L330,480 L350,620 L392,700 L470,730 L600,720 L700,700 L760,690 L880,690 L880,840 L720,830 L600,805 L470,805 L360,830 L260,805 L0,800Z"},
+   {c:"#BDBDBD", d:"M190,812 L300,795 L420,822 L560,860 L570,920 L190,920Z"},
+   {c:"#9B7BC0", d:"M430,30 L590,30 L668,140 L780,180 L880,186 L880,300 L770,302 L700,262 L620,206 L520,156 L446,122Z"},
+   {c:"#E9A23B", e:[815,325,20,64,8]},
+   {c:"#7A2E3A", e:[492,262,96,66,0], o:.85},
+   {c:"#7A2E3A", e:[676,582,62,78,-12], o:.85}
+  ],
+  dots:["Lille","Paris","Strasbourg","Rennes","Nantes","Bordeaux","Toulouse","Marseille","Nice","Lyon","Grenoble"], dotColor:"#111", big:"Paris"
+ },
+ serv: {
+  title:"Les espaces de services en France",
+  base:"#FFFFFF", drom:"#E8A0AE",
+  zones:[
+   {c:"#E8A0AE", s:"COAST", w:58},
+   {c:"#E8A0AE", d:"M700,470 L790,460 L838,560 L840,700 L770,724 L722,650 L700,560Z"},
+   {c:"#E8A0AE", e:[492,270,62,62,0], o:.9},
+   {c:"#E8A0AE", d:"M900,780 L1000,780 L1000,960 L900,960Z"}
+  ],
+  axes:[
+   "M492,270 L536,105 L560,40",
+   "M492,270 L825,287 L905,287",
+   "M492,270 L244,415 L150,450",
+   "M492,270 L296,639 L225,800",
+   "M492,270 L652,558 L693,786",
+   "M652,558 L880,560",
+   "M427,759 L592,759 L693,786 L820,743 L900,720",
+   "M592,759 L540,880"
+  ],
+  planes:[[470,248],[512,292],[652,558],[820,743]],
+  dots:["Paris","Lille","Strasbourg","Rennes","Nantes","Bordeaux","Lyon","Toulouse","Marseille","Nice"], dotColor:"#6B6B6B", big:"Paris"
+ }
+};
+
+function croquisSVG(kind, small){
+  const K = CRQ[kind], id = "k" + kind + (small ? "s" : "");
+  const rough = `<filter id="${id}r" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="12"/></filter>`;
+  const pencil = `<filter id="${id}p"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="1" seed="3" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -1.1 .95" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>`;
+  const mk = (n, c) => `<marker id="${id}${n}" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`;
+  const zone = z => {
+    const op = z.o ? ` fill-opacity="${z.o}"` : "";
+    if (z.e) return `<ellipse cx="${z.e[0]}" cy="${z.e[1]}" rx="${z.e[2]}" ry="${z.e[3]}" transform="rotate(${z.e[4]} ${z.e[0]} ${z.e[1]})" fill="${z.c}"${op}/>`;
+    if (z.s === "COAST") return `<path d="${GEO_ATL}" fill="none" stroke="${z.c}" stroke-width="${z.w}" stroke-linejoin="round"/><path d="${GEO_MED}" fill="none" stroke="${z.c}" stroke-width="${z.w}" stroke-linejoin="round"/>`;
+    if (z.s) return `<path d="${z.s}" fill="none" stroke="${z.c}" stroke-width="${z.w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    return `<path d="${z.d}" fill="${z.c}"${op}/>`;
+  };
+  let extra = "";
+  if (K.arrows) extra += K.arrows.map(a => {
+    const r = a.a * Math.PI / 180, dx = Math.cos(r), dy = Math.sin(r), nx = -dy * 13, ny = dx * 13, L = 100;
+    const x1 = a.x + dx * 8, y1 = a.y + dy * 8, x2 = a.x + dx * (8 + L), y2 = a.y + dy * (8 + L);
+    return `<path d="M${(x1 + nx).toFixed(0)},${(y1 + ny).toFixed(0)} L${(x2 + nx).toFixed(0)},${(y2 + ny).toFixed(0)}" stroke="#D7263D" stroke-width="7" marker-end="url(#${id}ex)"/>` +
+           `<path d="M${(x2 - nx).toFixed(0)},${(y2 - ny).toFixed(0)} L${(x1 - nx).toFixed(0)},${(y1 - ny).toFixed(0)}" stroke="#2546B8" stroke-width="7" marker-end="url(#${id}im)"/>`;
+  }).join("");
+  if (K.axes) extra += K.axes.map(d => `<path d="${d}" fill="none" stroke="#18202C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#${id}ax)"/>`).join("");
+  if (K.dots) extra += K.dots.map(n => { const [x, y] = PLACES[n]; const r = n === K.big ? 19 : 11; return `<circle cx="${x}" cy="${y}" r="${r}" fill="${K.dotColor}" stroke="#fff" stroke-width="3"/>`; }).join("");
+  if (K.planes) extra += K.planes.map(([x, y]) => `<path d="M${x},${y - 15} L${x + 14},${y + 11} L${x - 14},${y + 11}Z" fill="#18202C" stroke="#fff" stroke-width="2.5"/>`).join("");
+  const drom = DROM.map((d, i) => `<g><path d="${d.d}" fill="${K.drom}" stroke="#1d2733" stroke-width="2.4" stroke-linejoin="round"/></g>`).join("");
+  return `<svg viewBox="${VB.x} ${VB.y} ${VB.w} ${VB.h}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Croquis : ${K.title}" font-family="Atkinson Hyperlegible,Arial,sans-serif">
+  <defs>${rough}${pencil}${mk("ex", "#D7263D")}${mk("im", "#2546B8")}${mk("ax", "#18202C")}<clipPath id="${id}c"><path d="${GEO_FR}"/></clipPath></defs>
+  <rect x="${VB.x}" y="${VB.y}" width="${VB.w}" height="${VB.h}" fill="#FFFDF7"/>
+  <path d="M-40,${VB.y}V${VB.y + VB.h}" stroke="#CBD3DC" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="${GEO_FR}" fill="${K.base}"/>
+  <g clip-path="url(#${id}c)"><g filter="url(#${id}r)">${K.zones.map(zone).join("")}</g></g>
+  <path d="${GEO_FR}" fill="none" stroke="#1d2733" stroke-width="2.6" stroke-linejoin="round"/>
+  ${drom}${extra}
+  </svg>`;
+}
+
+(function(){
+"use strict";
+const KEY = "g2-espaces-productifs-3e-v1";
+const TH = Object.keys(THEMES), TY = Object.keys(TYPES);
+
+const $ = s => document.querySelector(s);
+const app = $("#app");
+const byId = Object.fromEntries(CARDS.map(c => [c.id, c]));
+
+/* ---------- Sauvegarde ---------- */
+function fresh(){ return {xp:0, cards:{}, badges:{}, days:[], reviewed:0, bestStreak:0, comeback:0, sel:[], types:[], size:20, best:{}}; }
+let S = fresh();
+try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(fresh(), JSON.parse(raw)); } catch(e) {}
+S.sel = S.sel.filter(t => THEMES[t]); S.types = S.types.filter(t => TYPES[t]);
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
+
+/* ---------- Outils ---------- */
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const box = id => (S.cards[id] || {}).b || 0;
+const cardScore = id => { const b = box(id); return b <= 1 ? 0 : b === 2 ? .4 : b === 3 ? .7 : 1; };
+const mastery = list => list.length ? list.reduce((s, c) => s + cardScore(c.id), 0) / list.length : 0;
+const inTheme = t => CARDS.filter(c => c.t === t);
+const inType = k => CARDS.filter(c => c.k === k);
+const pct = x => Math.round(x * 100);
+const ymd = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const today = () => ymd(new Date());
+const tomorrow = () => { const d = new Date(); d.setDate(d.getDate() + 1); return ymd(d); };
+const esc = s => String(s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const strip = s => String(s).replace(/<[^>]+>/g, "");
+const tagOf = c => THEMES[c.t].short + " · " + TYPES[c.k].short;
+const okThemes = th => th.every(t => S.sel.includes(t));
+
+function level(){
+  const xp = mastery(CARDS);
+  let i = 0; for (let k = 0; k < LEVELS.length; k++) if (xp >= LEVELS[k][0]) i = k;
+  if (i > (S.lvl || 0)) { S.lvl = i; save(); }
+  i = Math.max(i, S.lvl || 0);
+  const cur = LEVELS[i][0], next = LEVELS[i + 1] ? LEVELS[i + 1][0] : null;
+  return {n:i + 1, name:LEVELS[i][1], cur, next, p: next ? Math.max(0, Math.min(1, (xp - cur) / (next - cur))) : 1};
+}
+function dayStreak(){
+  const set = new Set(S.days); let n = 0; const d = new Date();
+  if (!set.has(today())) d.setDate(d.getDate() - 1);
+  while (set.has(ymd(d))) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+function markDay(){ const t = today(); if (!S.days.includes(t)) S.days.push(t); }
+const dueIds = () => CARDS.filter(c => { const r = S.cards[c.id]; if (!r) return false; return r.due ? r.due <= today() : r.b === 1; }).map(c => c.id);
+
+/* ---------- Icônes ---------- */
+const P = {
+  card:'<rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h8M8 14h5"/>',
+  bolt:'<path d="M13 3 5 14h6l-1 7 8-11h-6z"/>',
+  loop:'<path d="M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M20 4v5h-5M4 20v-5h5"/>',
+  book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 7h6"/>',
+  clock:'<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>',
+  scale:'<path d="M12 4v16M6 20h12M5 8h14"/><path d="m5 8-3 6h6zM19 8l-3 6h6z"/>',
+  pen:'<path d="m4 20 4-1 11-11-3-3L5 16z"/><path d="m14 7 3 3"/>',
+  check:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+  flip:'<path d="M4 7h11a5 5 0 0 1 0 10H9"/><path d="m8 3-4 4 4 4"/>',
+  quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  back:'<path d="M19 12H5M11 6l-6 6 6 6"/>',
+  medal:'<circle cx="12" cy="14" r="6"/><path d="M8 3h8l-2 5h-4z"/>',
+  pin:'<path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/>',
+  user:'<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.6 3.8-5.5 7-5.5s6 1.9 7 5.5"/>',
+  map:'<path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/>',
+  factory:'<path d="M3 21V11l5 3v-3l5 3v-3l5 3V4h3v17z"/><path d="M7 17h2M12 17h2"/>',
+  wheat:'<path d="M12 22V9"/><path d="M12 13c-2.8 0-4-1.8-4-4 2.8 0 4 1.8 4 4zM12 13c2.8 0 4-1.8 4-4-2.8 0-4 1.8-4 4zM12 18c-2.8 0-4-1.8-4-4 2.8 0 4 1.8 4 4zM12 18c2.8 0 4-1.8 4-4-2.8 0-4 1.8-4 4zM12 8c-1.6-1-2-2.6-1-5 1.6 1 2 2.6 1 5z"/>',
+  bag:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 12h18"/>',
+  bulb:'<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>'
+};
+const ico = (n, sz) => `<svg viewBox="0 0 24 24" width="${sz||20}" height="${sz||20}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]||""}</svg>`;
+const medal = (b, locked) => `<div class="medal${locked ? " locked" : ""}"><div class="disc">${ico(b.icon, 30)}</div></div>`;
+
+/* ---------- Badges ---------- */
+function checkBadges(ctx){
+  ctx = ctx || {};
+  const got = [];
+  const give = id => { const bd = BADGES.find(b => b.id === id); if (bd && !S.badges[id]) { S.badges[id] = today(); got.push(bd); } };
+  if (S.reviewed >= 10) give("first");
+  if (S.bestStreak >= 5) give("streak5");
+  if (S.comeback >= 5) give("comeback");
+  for (const t of TH) if (mastery(inTheme(t)) >= .8) give("m_" + t);
+  if (ctx.geo) give("geo");
+  if ((S.examBest || 0) >= 16) give("ready");
+  if (got.length) { save(); got.forEach((b, i) => setTimeout(() => toast(b), i * 2600)); }
+}
+let toastEl;
+function toast(b){
+  if (!toastEl) { toastEl = document.createElement("div"); toastEl.className = "toast"; toastEl.setAttribute("role", "status"); document.body.appendChild(toastEl); }
+  toastEl.innerHTML = medal(b) + `<div><small>Badge débloqué</small><b>${esc(b.name)}</b></div>`;
+  requestAnimationFrame(() => toastEl.classList.add("show"));
+  confetti();
+  clearTimeout(toastEl._t); toastEl._t = setTimeout(() => toastEl.classList.remove("show"), 2300);
+}
+function confetti(){
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let c = $("#confetti"); if (!c) { c = document.createElement("canvas"); c.id = "confetti"; document.body.appendChild(c); }
+  const ctx = c.getContext("2d"), W = c.width = innerWidth, H = c.height = innerHeight;
+  const cs = getComputedStyle(document.documentElement);
+  const cols = ["--gold","--accent","--c-ind","--c-agri","--c-serv","--k-def"].map(v => cs.getPropertyValue(v).trim() || "#c90");
+  const ps = Array.from({length:90}, () => ({x:W/2 + (Math.random()-.5)*80, y:H*.75, vx:(Math.random()-.5)*12, vy:-Math.random()*14-6, r:Math.random()*6+3, c:cols[Math.floor(Math.random()*cols.length)], a:Math.random()*6, s:(Math.random()-.5)*.3}));
+  let f = 0;
+  (function tick(){
+    ctx.clearRect(0,0,W,H);
+    ps.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += .42; p.vx *= .99; p.a += p.s; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2); ctx.restore(); });
+    if (++f < 110) requestAnimationFrame(tick); else ctx.clearRect(0,0,W,H);
+  })();
+}
+function xpFloat(n){
+  if (n <= 0) return;
+  const el = document.createElement("div"); el.className = "xpfloat"; el.textContent = "+" + n + " XP";
+  document.body.appendChild(el); setTimeout(() => el.remove(), 950);
+}
+function addXP(n){ S.xp += n; xpFloat(n); }
+
+/* Statistiques anonymes (GoatCounter) : uniquement le nombre de sessions terminées, sans donnée personnelle */
+function track(name){ try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: "g2-" + name, title: name, event: true}); } catch(e) {} }
+/* Statistiques anonymes (Google Sheets) : appli et mode de jeu uniquement */
+const APP_NAME = "Réviser 3e G2";
+const STATS_URL = window.G2_STATS_URL || "";
+function deviceType(){
+  try { const touch = matchMedia("(pointer: coarse)").matches; if (!touch) return "ordinateur"; return Math.min(screen.width, screen.height) < 600 ? "téléphone" : "tablette"; } catch(e) { return ""; }
+}
+function reportVisit(){
+  try {
+    if (!STATS_URL || navigator.webdriver) return;
+    const send = () => {
+      ["pointerdown", "keydown", "touchstart"].forEach(ev => removeEventListener(ev, send, true));
+      try { if (sessionStorage.getItem("g2-visite")) return; sessionStorage.setItem("g2-visite", "1"); } catch(e) {}
+      fetch(STATS_URL, {method: "POST", mode: "no-cors", keepalive: true, headers: {"Content-Type": "text/plain;charset=utf-8"},
+        body: JSON.stringify({type: "visite", app: APP_NAME, appareil: deviceType()})}).catch(() => {});
+    };
+    ["pointerdown", "keydown", "touchstart"].forEach(ev => addEventListener(ev, send, {capture: true, passive: true}));
+  } catch(e) {}
+}
+function report(mode){
+  try {
+    if (!STATS_URL || navigator.webdriver) return;
+    fetch(STATS_URL, {method: "POST", mode: "no-cors", keepalive: true, headers: {"Content-Type": "text/plain;charset=utf-8"}, body: JSON.stringify({app: APP_NAME, mode})}).catch(() => {});
+  } catch(e) {}
+}
+
+/* ---------- Mise à jour d'une carte ---------- */
+function grade(id, r){ // r : 0 raté, 1 presque, 2 su
+  const rec = S.cards[id] || (S.cards[id] = {b:0, ok:0, ko:0});
+  const before = rec.b;
+  if (r === 2) {
+    if (rec.f) { S.comeback++; rec.f = false; }
+    // carte ratée : elle revient à J+1, puis J+3, puis J+7 tant qu'elle est réussie
+    if (rec.st && rec.st < 3) { const d = new Date(); d.setDate(d.getDate() + (rec.st === 1 ? 3 : 7)); rec.due = ymd(d); rec.st++; }
+    else { delete rec.due; rec.st = 0; }
+    rec.b = Math.min(5, Math.max(before, 1) + 1); rec.ok++;
+  } else if (r === 1) {
+    rec.b = before >= 3 ? before - 1 : Math.max(1, before);
+    rec.due = tomorrow();
+  } else {
+    rec.b = 1; rec.ko++; rec.f = true; rec.due = tomorrow(); rec.st = 1;
+  }
+  rec.last = Date.now();
+  S.reviewed++; markDay();
+}
+
+/* ---------- Sélection des cartes ---------- */
+function pool(){ return CARDS.filter(c => S.sel.includes(c.t) && S.types.includes(c.k)); }
+function pick(list, n){
+  const now = Date.now();
+  return list.map(c => {
+    const r = S.cards[c.id]; const b = r ? r.b : 0;
+    let pr = b === 0 ? 1.3 : b === 1 ? 0 : b;
+    if (r && r.last && now - r.last < 8 * 60 * 1000) pr += 1.5;
+    return {c, pr: pr + Math.random() * 1.2};
+  }).sort((a, b) => a.pr - b.pr).slice(0, n).map(x => x.c);
+}
+const plansAvail = () => PLANS.map((p, i) => [p, i]).filter(([p]) => okThemes(p.th));
+const subjAvail = () => SUBJECTS.map((s, g) => [s, g]).filter(([, g]) => plansAvail().some(([p]) => p.g === g));
+const EXAM_N = 15;
+
+/* =========================================================
+   ACCUEIL
+   ========================================================= */
+let confirmReset = false, view = "home";
+function home(){
+  view = "home"; stopTimer(); clearInterval(examTick);
+  const lv = level(), g = mastery(CARDS);
+  const acquired = CARDS.filter(c => box(c.id) >= 3).length;
+  const fails = dueIds().length;
+  const nb = Object.keys(S.badges).length;
+  const sizes = [10, 20, 40, "Tout"];
+  const p = pool(), none = !S.sel.length, qn = qcmPool().length;
+  const selNames = S.sel.map(t => THEMES[t].short).join(" + ");
+  const thCount = k => CARDS.filter(c => c.k === k && (none || S.sel.includes(c.t))).length;
+  app.innerHTML = `
+  <header class="top">
+    <div class="brand"><div class="tab-h2" aria-hidden="true">G2</div>
+      <div class="brand-txt"><b>Les espaces productifs et leurs évolutions</b><span>3e · Géographie · Révisions</span>
+        <div class="chips"><span class="chip">${ico("pin",13)} Collège Plan Menu · Coublevie · 3e</span><span class="chip">${ico("user",13)} Jeanne Cador · Enseignante</span></div></div></div>
+    <div class="navbtns"><button class="ghost" id="toBadges">${ico("medal",16)} Badges et bilan</button></div>
+  </header>
+
+  ${fails ? `<div class="review-banner today"><p><b>${fails} carte${fails > 1 ? "s" : ""} à revoir aujourd'hui.</b> Ce sont celles que vous aviez ratées : revoyez-les pour les fixer.</p><button class="go" id="goFails">${ico("loop",18)} Les revoir</button></div>` : ""}
+
+  <section class="dash fade-in" aria-label="Votre progression">
+    <div class="player">
+      <div class="lvl" title="Niveau ${lv.n} sur ${LEVELS.length}">${lv.n}<small>NIV.</small></div>
+      <div class="pinfo">
+        <div class="pname"><h2>${esc(lv.name)}</h2></div>
+        <div class="xpbar"><i style="width:${pct(lv.p)}%"></i></div>
+        <div class="xptxt"><span>${S.xp} XP</span><span>${lv.next ? "niveau suivant : " + pct(lv.next) + " %" : "niveau maximum"}</span></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat ready"><b>${pct(g)} %</b><span>du chapitre maîtrisé</span></div>
+      <div class="stat"><b>${acquired}<small class="muted" style="font-size:16px">/${CARDS.length}</small></b><span>cartes acquises</span></div>
+      <div class="stat fire"><b>${dayStreak()}</b><span>jour${dayStreak() > 1 ? "s" : ""} de révision d'affilée</span></div>
+      <div class="stat"><b>${nb}<small class="muted" style="font-size:16px">/${BADGES.length}</small></b><span>badges gagnés</span></div>
+    </div>
+  </section>
+
+  <section class="how" aria-label="Comment ça marche">
+    <h3>Comment ça marche ?</h3>
+    <ol>
+      <li><span><b>Choisissez</b> le ou les thèmes déjà vus en classe.</span></li>
+      <li><span><b>Choisissez</b> le type de questions, puis un mode.</span></li>
+      <li><span><b>Soyez honnête</b> : « Je savais », « Presque » ou « Raté ».</span></li>
+      <li><span><b>Les cartes ratées reviennent</b> le lendemain, jusqu'à ce que vous les sachiez.</span></li>
+    </ol>
+    <p>Ajoutez un thème à chaque nouvelle partie du cours. Chaque bonne réponse rapporte des points (XP) ; enchaînez-les pour débloquer des badges.</p>
+  </section>
+
+  <div class="sec-title"><h3><span class="stepn">1</span>Le thème étudié</h3>${none ? "" : `<button class="linkbtn" id="allThemes">${S.sel.length === TH.length ? "Tout désélectionner" : "Tout le chapitre"}</button>`}</div>
+  <div class="themes big">
+    ${TH.map(k => { const t = THEMES[k], l = inTheme(k), m = mastery(l); return `
+      <button class="theme" style="--c:${t.color}" aria-pressed="${S.sel.includes(k)}" data-t="${k}">
+        <div class="th-top"><span class="th-ico">${ico(t.icon,22)}</span><span class="chk"></span></div>
+        <span class="th-name">${esc(t.label)}</span>
+        <span class="th-sub">${esc(t.sub)}</span>
+        <div class="mbar"><i style="width:${pct(m)}%"></i></div>
+        <div class="th-meta"><span>${l.length} cartes</span><span>${pct(m)} % maîtrisé</span></div>
+      </button>`; }).join("")}
+  </div>
+
+  <div class="sec-title"><h3><span class="stepn">2</span>Le type de questions</h3><span class="muted" style="font-size:14px">${S.types.length ? "pour les flip cards et le défi QCM" : "touchez un ou plusieurs types"}</span></div>
+  <div class="types">
+    ${TY.map(k => { const t = TYPES[k]; return `<button class="ty" style="--c:${t.color}" aria-pressed="${S.types.includes(k)}" data-k="${k}">${ico(t.icon,18)}<span>${esc(t.label)}</span><b>${thCount(k)}</b><span class="tchk"></span></button>`; }).join("")}
+  </div>
+
+  <div class="sec-title"><h3><span class="stepn">3</span>Le mode de révision</h3><span class="muted" style="font-size:14px">${none ? "aucun thème choisi" : esc(selNames) + " · " + p.length + " cartes"}</span></div>
+  <div class="modes${none ? " off" : ""}">
+    <div class="mode">
+      <h4>${ico("flip",22)} Flip cards</h4>
+      <p>Lisez la question, cherchez la réponse dans votre tête, retournez la carte et notez-vous honnêtement. Les cartes ratées reviennent le lendemain, puis 3 et 7 jours après.</p>
+      <div class="seg" role="group" aria-label="Nombre de cartes">${sizes.map(s => `<button data-size="${s}" aria-pressed="${String(S.size) === String(s)}">${s}</button>`).join("")}</div>
+      <button class="go" id="goFlip" ${p.length ? "" : "disabled"}>Commencer ${ico("arrow",18)}</button>
+      ${!none && !S.types.length ? `<p class="small-warn">Choisissez d'abord un type de questions (étape 2).</p>` : ""}
+    </div>
+    <div class="mode">
+      <h4>${ico("quiz",22)} Défi QCM</h4>
+      <p>10 questions à choix multiples, corrigées tout de suite. Répondez vite pour gagner un bonus. Objectif : 10/10.</p>
+      <button class="go alt" id="goQcm" ${qn >= 4 ? "" : "disabled"}>Lancer le défi ${ico("arrow",18)}</button>
+      ${!none && !S.types.length ? `<p class="small-warn">Choisissez d'abord un type de questions (étape 2).</p>` : ""}
+    </div>
+    <div class="mode">
+      <h4>${ico("map",22)} Croquis à compléter</h4>
+      <p>Le croquis du cours : retrouvez le titre et la légende, puis placez les lieux à connaître. Glissez chaque nom à sa place.</p>
+      <button class="go alt" id="goGeo" ${none ? "disabled" : ""}>Compléter ${ico("arrow",18)}</button>
+    </div>
+    <div class="mode">
+      <h4>${ico("pen",22)} Construire un plan</h4>
+      <p>Les sujets possibles de développement construit : rangez les idées dans la bonne partie et repérez l'idée hors sujet. ${subjAvail().length} sujet${subjAvail().length > 1 ? "s" : ""} disponible${subjAvail().length > 1 ? "s" : ""}.</p>
+      <button class="go alt" id="goPlan" ${plansAvail().length ? "" : "disabled"}>Construire ${ico("arrow",18)}</button>
+    </div>
+    <div class="mode exam">
+      <h4>${ico("clock",22)} Évaluation blanche</h4>
+      <span class="veille">À faire juste avant l'évaluation</span>
+      <p>${EXAM_N} questions sur les notions clés de tout le chapitre : 5 sur l'industrie, 5 sur l'agriculture, 5 sur les services, surtout des définitions. Avec chrono, sans correction pendant l'épreuve. À la fin : votre note sur 20 et votre bilan par notion.</p>
+      <button class="go" id="goExam">Commencer l'évaluation ${ico("arrow",18)}</button>
+    </div>
+  </div>
+
+  <div class="sec-title"><h3>Vos badges</h3><button class="linkbtn" id="toBadges2">Voir tous les badges</button></div>
+  <div class="badge-strip">
+    ${BADGES.slice().sort((a, b) => (S.badges[b.id] ? 1 : 0) - (S.badges[a.id] ? 1 : 0)).map(b => `<div class="medal${S.badges[b.id] ? "" : " locked"}" title="${esc(b.desc)}"><div class="disc">${ico(b.icon,30)}</div><span>${esc(b.name)}</span></div>`).join("")}
+  </div>
+  <p class="foot">Votre progression est enregistrée dans ce navigateur, sur cet appareil.</p>`;
+
+  app.querySelectorAll(".theme").forEach(b => b.onclick = () => {
+    const t = b.dataset.t; S.sel = S.sel.includes(t) ? S.sel.filter(x => x !== t) : TH.filter(x => x === t || S.sel.includes(x)); save(); keepScroll(home);
+  });
+  app.querySelectorAll(".ty").forEach(b => b.onclick = () => {
+    const k = b.dataset.k; S.types = S.types.includes(k) ? S.types.filter(x => x !== k) : TY.filter(x => x === k || S.types.includes(x)); save(); keepScroll(home);
+  });
+  const at = $("#allThemes"); if (at) at.onclick = () => { S.sel = S.sel.length === TH.length ? [] : TH.slice(); save(); keepScroll(home); };
+  app.querySelectorAll("[data-size]").forEach(b => b.onclick = () => { S.size = b.dataset.size === "Tout" ? "Tout" : +b.dataset.size; save(); keepScroll(home); });
+  $("#goFlip").onclick = () => { const n = S.size === "Tout" ? p.length : S.size; startFlip(pick(p, n).map(c => c.id)); };
+  $("#goQcm").onclick = startQcm;
+  $("#goPlan").onclick = planPick;
+  $("#goGeo").onclick = geoPick;
+  $("#goExam").onclick = startExam;
+  $("#toBadges").onclick = $("#toBadges2").onclick = badgesView;
+  const gf = $("#goFails"); if (gf) gf.onclick = () => startFlip(shuffle(dueIds()));
+}
+function keepScroll(fn){ const y = window.scrollY; fn(); window.scrollTo(0, y); }
+
+/* =========================================================
+   FLIP CARDS
+   ========================================================= */
+let F = null;
+function startFlip(ids){
+  if (!ids.length) return;
+  F = {queue: ids.slice(), total: ids.length, done: 0, i: 0, flipped: false, combo: 0, xp0: S.xp, res: {}, requeue: {}};
+  view = "flip"; renderFlip(); window.scrollTo(0, 0);
+}
+function boxDots(id){
+  const b = box(id); let h = "";
+  for (let i = 1; i <= 5; i++) h += `<i class="${i <= b ? "on" : ""}"></i>`;
+  return `<span class="fbox" title="Niveau de la carte : ${b}/5">${h}</span>`;
+}
+function renderFlip(){
+  if (F.i >= F.queue.length) return endFlip();
+  const c = byId[F.queue[F.i]], th = THEMES[c.t];
+  F.flipped = false;
+  app.innerHTML = `
+  <div class="sess-head">
+    <button class="ghost" id="quit" aria-label="Retour à l'accueil">${ico("back",16)}</button>
+    <div class="prog" aria-hidden="true"><i style="width:${pct(F.done / F.total)}%"></i></div>
+    <span class="sess-count">${F.done}/${F.total}</span>
+    <span class="combo" id="combo">${F.combo >= 2 ? "×" + F.combo : ""}</span>
+  </div>
+  <div class="stage fade-in">
+    <div class="flip" id="flip" tabindex="0" role="button" aria-label="Retourner la carte">
+      <div class="face front" style="--c:${th.color}">
+        <div class="fhead"><span class="ftag">${esc(tagOf(c))}</span>${boxDots(c.id)}</div>
+        <div class="ruled"><div class="q">${c.q}</div><div class="hint">Touchez la carte pour voir le corrigé</div></div>
+      </div>
+      <div class="face back" style="--c:${th.color}">
+        <div class="fhead"><span class="ftag">Corrigé · ${esc(tagOf(c))}</span>${boxDots(c.id)}</div>
+        <div class="ruled">
+          <p class="qback">${strip(c.q)}</p>
+          <div class="ans-label">Réponse</div>
+          <div class="ans">${c.a}</div>
+          ${c.d ? `<div class="det">${c.d}</div>` : ""}
+          ${c.p ? `<div class="plus"><b class="lab">Pour aller plus loin</b>${c.p}</div>` : ""}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="actions"><button class="go reveal" id="reveal">Voir la réponse</button></div>
+  <p class="keys">Espace : retourner · 1 : raté · 2 : presque · 3 : je savais</p>`;
+  $("#quit").onclick = () => { save(); home(); };
+  $("#flip").onclick = doFlip;
+  $("#reveal").onclick = doFlip;
+}
+function doFlip(){
+  if (view !== "flip") return;
+  F.flipped = !F.flipped;
+  $("#flip").classList.toggle("flipped", F.flipped);
+  if (F.flipped && !$("#rate")) {
+    $("#actions").innerHTML = `<div class="rate" id="rate">
+      <button class="r0" data-r="0">Raté<small>reviendra vite</small></button>
+      <button class="r1" data-r="1">Presque<small>reviendra</small></button>
+      <button class="r2" data-r="2">Je savais<small>+10 XP</small></button></div>`;
+    app.querySelectorAll("[data-r]").forEach(b => b.onclick = e => { e.stopPropagation(); rateFlip(+b.dataset.r); });
+  }
+}
+function rateFlip(r){
+  const id = F.queue[F.i];
+  grade(id, r);
+  if (!(id in F.res)) F.res[id] = r;
+  let gain;
+  if (r === 2) { F.combo++; S.bestStreak = Math.max(S.bestStreak, F.combo); gain = 10 + Math.min(F.combo - 1, 5) * 2; }
+  else { F.combo = 0; gain = r === 1 ? 4 : 1; }
+  addXP(gain);
+  const n = F.requeue[id] || 0;
+  if (r === 0 && n < 3) { F.queue.splice(Math.min(F.queue.length, F.i + 4), 0, id); F.requeue[id] = n + 1; }
+  else if (r === 1 && n < 1) { F.queue.splice(Math.min(F.queue.length, F.i + 7), 0, id); F.requeue[id] = n + 1; }
+  if (!F.queue.slice(F.i + 1).includes(id)) F.done++;
+  F.i++;
+  save(); checkBadges();
+  renderFlip();
+  if (F.combo >= 2) { const el = $("#combo"); if (el) el.classList.add("pop"); }
+}
+function missList(ids, qfn){
+  return `<div class="miss">${ids.map(i => { const c = byId[i], th = THEMES[c.t]; return `<details style="--c:${th.color}"><summary><span class="ftag">${esc(tagOf(c))}</span>${strip(qfn ? qfn(c) : c.q)}</summary><p><b>${c.a}</b></p>${c.d ? `<div style="margin-top:8px">${c.d}</div>` : ""}</details>`; }).join("")}</div>`;
+}
+function endFlip(){
+  view = "end"; track("session-flipcards"); report("Flip cards");
+  const ids = Object.keys(F.res);
+  const k = ids.filter(i => F.res[i] === 0), m = ids.filter(i => F.res[i] === 1), o = ids.filter(i => F.res[i] === 2);
+  const toReview = k.concat(m);
+  const msg = o.length === ids.length ? "Parfait !" : o.length / ids.length >= .7 ? "Très bien !" : o.length / ids.length >= .4 ? "Bon travail" : "Continuez !";
+  app.innerHTML = `
+  <div class="endcard fade-in">
+    <div><span class="ftag" style="color:var(--accent)">Session terminée</span><h2>${msg}</h2></div>
+    <div class="endstats">
+      <div class="stat"><b class="o">${o.length}</b><span>du premier coup</span></div>
+      <div class="stat"><b class="m">${m.length}</b><span>presque</span></div>
+      <div class="stat"><b class="k">${k.length}</b><span>ratées au départ</span></div>
+      <div class="stat"><b class="x">+${S.xp - F.xp0}</b><span>XP gagnés</span></div>
+    </div>
+    ${toReview.length ? `<div><h3 class="h3s">À retenir</h3>${missList(toReview)}</div>` : ""}
+    <div class="row">
+      ${toReview.length ? `<button class="go" id="again">${ico("loop",18)} Rejouer ces ${toReview.length} cartes</button>` : ""}
+      <button class="go alt" id="more">Nouvelle session</button>
+      <button class="go alt" id="back">Accueil</button>
+    </div>
+  </div>`;
+  if (toReview.length) $("#again").onclick = () => startFlip(shuffle(toReview));
+  $("#more").onclick = () => { const p = pool(); startFlip(pick(p, S.size === "Tout" ? p.length : S.size).map(c => c.id)); };
+  $("#back").onclick = home;
+  if (o.length === ids.length && ids.length >= 5) confetti();
+  window.scrollTo(0, 0);
+}
+
+/* =========================================================
+   QCM
+   ========================================================= */
+let Q = null, timerRAF = 0;
+function qcmPool(){ return pool().filter(c => c.s && c.x && c.x.length >= 3); }
+function stopTimer(){ cancelAnimationFrame(timerRAF); }
+function startQcm(){
+  const list = pick(qcmPool(), 10);
+  if (list.length < 4) return;
+  Q = {list, i: 0, score: 0, xp0: S.xp, wrong: []};
+  view = "qcm"; renderQcm(); window.scrollTo(0, 0);
+}
+const optionsFor = c => shuffle([c.s].concat(c.x.slice(0, 3)));
+function qcmQuestion(c){
+  if (/^Définissez\s*:/.test(c.q)) { const t = c.q.replace(/^Définissez\s*:\s*/, ""); return "Quelle est la bonne définition " + (/^(<b>)?[aeiouyéèêàâîôûh]/i.test(t) ? "d'" : "de ") + t + " ?"; }
+  return c.q;
+}
+function renderQcm(){
+  if (Q.i >= Q.list.length) return endQcm();
+  const c = Q.list[Q.i], th = THEMES[c.t], opts = optionsFor(c);
+  app.innerHTML = `
+  <div class="sess-head">
+    <button class="ghost" id="quit" aria-label="Retour à l'accueil">${ico("back",16)}</button>
+    <div class="prog" aria-hidden="true"><i style="width:${pct(Q.i / Q.list.length)}%"></i></div>
+    <span class="sess-count">${Q.i + 1}/${Q.list.length}</span>
+    <span class="combo">${Q.score} pt${Q.score > 1 ? "s" : ""}</span>
+  </div>
+  <div class="face fade-in" style="--c:${th.color};min-height:0">
+    <div class="fhead"><span class="ftag">Défi · ${esc(tagOf(c))}</span><span class="fbox">bonus vitesse</span></div>
+    <div class="timer"><i id="tbar"></i></div>
+    <div class="ruled" style="padding-block:14px"><div class="q" style="padding-block:6px;font-size:clamp(19px,3vw,24px)">${qcmQuestion(c)}</div></div>
+  </div>
+  <div class="qcm-opts">${opts.map((o, i) => `<button class="opt" data-ok="${o === c.s ? 1 : 0}"><span class="l">${"ABCD"[i]}</span><span>${esc(o)}</span></button>`).join("")}</div>
+  <div id="fb"></div>`;
+  $("#quit").onclick = () => { stopTimer(); save(); home(); };
+  const t0 = performance.now(), LIM = 12000;
+  stopTimer();
+  (function tk(){ const e = performance.now() - t0, bar = $("#tbar"); if (!bar) return; bar.style.width = Math.max(0, 100 - e / LIM * 100) + "%"; if (e < LIM) timerRAF = requestAnimationFrame(tk); })();
+  app.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+    stopTimer();
+    const fast = performance.now() - t0 < LIM, ok = b.dataset.ok === "1";
+    app.querySelectorAll(".opt").forEach(x => { x.disabled = true; if (x.dataset.ok === "1") x.classList.add("good"); });
+    if (!ok) b.classList.add("bad");
+    grade(c.id, ok ? 2 : 0);
+    let gain = 0;
+    if (ok) { Q.score++; gain = 12 + (fast ? 5 : 0); } else Q.wrong.push(c.id);
+    if (gain) addXP(gain);
+    save();
+    $("#fb").innerHTML = `<div class="feedback ${ok ? "" : "ko"} fade-in"><b class="v" style="color:${ok ? "var(--ok)" : "var(--ko)"}">${ok ? (fast ? "Bonne réponse, et rapide !" : "Bonne réponse") : "Pas tout à fait"}</b>
+      <div><b>${c.a}</b></div>${c.d ? `<div style="margin-top:4px">${c.d}</div>` : ""}</div>
+      <button class="go" id="next" style="width:100%;margin-top:12px">${Q.i + 1 < Q.list.length ? "Question suivante" : "Voir mon score"} ${ico("arrow",18)}</button>`;
+    $("#next").onclick = () => { Q.i++; renderQcm(); };
+    $("#next").focus({preventScroll:true});
+    checkBadges();
+  });
+}
+function endQcm(){
+  view = "end"; track("session-qcm"); report("QCM");
+  const perfect = Q.score === Q.list.length && Q.list.length >= 10;
+  if (perfect) addXP(30);
+  save(); checkBadges();
+  app.innerHTML = `
+  <div class="endcard fade-in">
+    <div><span class="ftag" style="color:var(--accent)">Défi QCM terminé</span><h2>${Q.score}/${Q.list.length}${perfect ? " · Sans faute !" : ""}</h2></div>
+    <div class="endstats">
+      <div class="stat"><b class="o">${Q.score}</b><span>bonnes réponses</span></div>
+      <div class="stat"><b class="k">${Q.wrong.length}</b><span>erreurs</span></div>
+      <div class="stat"><b class="x">+${S.xp - Q.xp0}</b><span>XP gagnés</span></div>
+      <div class="stat"><b>${pct(mastery(CARDS))} %</b><span>maîtrise du chapitre</span></div>
+    </div>
+    ${Q.wrong.length ? missList(Q.wrong, qcmQuestion) : ""}
+    <div class="row">
+      ${Q.wrong.length ? `<button class="go" id="again">${ico("flip",18)} Retravailler mes erreurs en flip cards</button>` : ""}
+      <button class="go alt" id="more">Nouveau défi</button>
+      <button class="go alt" id="back">Accueil</button>
+    </div>
+  </div>`;
+  if (Q.wrong.length) $("#again").onclick = () => startFlip(shuffle(Q.wrong));
+  $("#more").onclick = startQcm;
+  $("#back").onclick = home;
+  if (perfect) confetti();
+  window.scrollTo(0, 0);
+}
+
+/* =========================================================
+   ÉVALUATION BLANCHE (thèmes choisis, essentiel du cours et de la fiche uniquement)
+   ========================================================= */
+let E = null, examTick = 0;
+function startExam(){
+  // évaluation centrée sur les notions clés (voir EXAM_KEYS dans les données)
+  const list = [];
+  TH.forEach(t => EXAM_KEYS[t].forEach(g => shuffle(g.from.filter(id => byId[id] && byId[id].s)).slice(0, g.n).forEach(id => list.push(byId[id]))));
+  E = {list: shuffle(list).map(c => ({c, opts: optionsFor(c)})), i: 0, answers: {}, t0: Date.now(), xp0: S.xp};
+  view = "exam"; renderExam();
+  clearInterval(examTick);
+  examTick = setInterval(() => { const el = $("#chrono"); if (el) el.textContent = mmss(Date.now() - E.t0); else clearInterval(examTick); }, 1000);
+}
+const mmss = ms => { const s = Math.floor(ms / 1000); return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); };
+function renderExam(){
+  const it = E.list[E.i], c = it.c, th = THEMES[c.t], chosen = E.answers[E.i];
+  app.innerHTML = `
+  <div class="sess-head">
+    <button class="ghost" id="quit" aria-label="Abandonner l'évaluation">${ico("back",16)}</button>
+    <div class="prog" aria-hidden="true"><i style="width:${pct(E.i / E.list.length)}%"></i></div>
+    <span class="sess-count">${E.i + 1}/${E.list.length}</span>
+    <span class="combo mono" id="chrono" title="Temps écoulé">${mmss(Date.now() - E.t0)}</span>
+  </div>
+  <div class="face fade-in" style="--c:${th.color};min-height:0">
+    <div class="fhead"><span class="ftag">Évaluation blanche · ${esc(tagOf(c))}</span><span class="fbox">sans correction immédiate</span></div>
+    <div class="ruled" style="padding-block:14px"><div class="q" style="padding-block:6px;font-size:clamp(19px,3vw,24px)">${qcmQuestion(c)}</div></div>
+  </div>
+  <div class="qcm-opts">${it.opts.map((o, i) => `<button class="opt${chosen === i ? " chosen" : ""}" data-i="${i}" aria-pressed="${chosen === i}"><span class="l">${"ABCD"[i]}</span><span>${esc(o)}</span></button>`).join("")}</div>
+  <div class="row" style="margin-top:14px">
+    ${E.i > 0 ? `<button class="go alt" id="prev">${ico("back",18)} Précédente</button>` : ""}
+    <button class="go" id="next" ${chosen !== undefined ? "" : "disabled"}>${E.i + 1 < E.list.length ? "Question suivante" : "Terminer et voir ma note"} ${ico("arrow",18)}</button>
+  </div>
+  <div id="quitBox"></div>`;
+  app.querySelectorAll(".opt").forEach(b => b.onclick = () => { E.answers[E.i] = +b.dataset.i; renderExam(); });
+  $("#next").onclick = () => { if (E.i + 1 < E.list.length) { E.i++; renderExam(); } else endExam(); };
+  const pv = $("#prev"); if (pv) pv.onclick = () => { E.i--; renderExam(); };
+  $("#quit").onclick = () => {
+    $("#quitBox").innerHTML = `<div class="confirm-box" style="margin-top:14px"><span>Abandonner l'évaluation ? Vos réponses ne seront pas comptées.</span><button class="danger" id="qYes">Abandonner</button><button class="ghost" id="qNo">Continuer</button></div>`;
+    $("#qYes").onclick = () => { clearInterval(examTick); home(); };
+    $("#qNo").onclick = () => { $("#quitBox").innerHTML = ""; };
+  };
+  window.scrollTo(0, 0);
+}
+function endExam(){
+  clearInterval(examTick);
+  view = "end";
+  const dur = Date.now() - E.t0;
+  let ok = 0; const notions = {};
+  E.list.forEach((it, i) => {
+    it.mine = it.opts[E.answers[i]]; it.good = it.mine === it.c.s; if (it.good) ok++;
+    grade(it.c.id, it.good ? 2 : 0);
+    const key = it.c.t + "|" + it.c.k, n = notions[key] || (notions[key] = {ok: 0, tot: 0}); n.tot++; if (it.good) n.ok++;
+  });
+  const note = Math.round(ok / E.list.length * 40) / 2;
+  addXP(ok * 8 + (note >= 16 ? 30 : 0));
+  track("session-evaluation"); report("Évaluation blanche");
+  S.examBest = Math.max(S.examBest || 0, note); save(); checkBadges();
+  const wrong = E.list.filter(it => !it.good);
+  const msg = note >= 16 ? "Excellent, vous êtes prêt !" : note >= 12 ? "Bien, encore un petit effort" : note >= 8 ? "Des bases, mais il faut réviser" : "À retravailler avant l'évaluation";
+  const nkeys = Object.keys(notions).sort((a, b) => TH.indexOf(a.split("|")[0]) - TH.indexOf(b.split("|")[0]) || TY.indexOf(a.split("|")[1]) - TY.indexOf(b.split("|")[1]));
+  app.innerHTML = `
+  <div class="endcard fade-in">
+    <div><span class="ftag" style="color:var(--accent)">Évaluation blanche · ${mmss(dur)}</span>
+      <h2 class="note20">${String(note).replace(".", ",")}<small>/20</small></h2><p class="muted" style="margin:6px 0 0;font-size:15px">${msg} · ${ok} bonne${ok > 1 ? "s" : ""} réponse${ok > 1 ? "s" : ""} sur ${E.list.length}</p></div>
+    <div><h3 class="h3s">Bilan par notion</h3>
+      <div class="tbars">${nkeys.map(key => { const [t, k] = key.split("|"), n = notions[key]; return `<div class="tbar" style="--c:${THEMES[t].color}"><span>${esc(THEMES[t].short)} · ${esc(TYPES[k].label.split(" :")[0])}</span><div class="mbar"><i style="width:${pct(n.ok / n.tot)}%"></i></div><b>${n.ok}/${n.tot}</b></div>`; }).join("")}</div></div>
+    ${wrong.length ? `<div><h3 class="h3s">Corrigé de vos erreurs</h3>
+      <div class="miss">${wrong.map(it => { const c = it.c, th = THEMES[c.t]; return `<details style="--c:${th.color}" open><summary><span class="ftag">${esc(tagOf(c))}</span>${strip(qcmQuestion(c))}</summary><p class="muted">Votre réponse : ${esc(it.mine || "—")}</p><p><b>Bonne réponse : ${esc(c.s)}</b></p><div style="margin-top:4px">${c.a}${c.d ? "<br>" + c.d : ""}</div></details>`; }).join("")}</div>
+      <p class="muted" style="font-size:14px;margin:10px 0 0">Ces cartes reviendront demain dans « Cartes à revoir aujourd'hui ».</p></div>` : ""}
+    <div class="row">
+      ${wrong.length ? `<button class="go" id="again">${ico("flip",18)} Retravailler mes erreurs maintenant</button>` : ""}
+      <button class="go alt" id="more">Nouvelle évaluation blanche</button>
+      <button class="go alt" id="back">Accueil</button>
+    </div>
+  </div>`;
+  if (wrong.length) $("#again").onclick = () => startFlip(shuffle(wrong.map(it => it.c.id)));
+  $("#more").onclick = startExam;
+  $("#back").onclick = home;
+  if (note >= 16) confetti();
+  window.scrollTo(0, 0);
+}
+
+/* =========================================================
+   OUTILS COMMUNS
+   ========================================================= */
+function head(done, total, count){
+  return `<div class="sess-head">
+    <button class="ghost" id="quit" aria-label="Retour à l'accueil">${ico("back",16)}</button>
+    <div class="prog" aria-hidden="true"><i style="width:${pct(done / total)}%"></i></div>
+    <span class="sess-count">${count}</span><span class="combo"></span>
+  </div>`;
+}
+function bindQuit(){ const q = $("#quit"); if (q) q.onclick = () => { save(); home(); }; }
+function intro(color, tag, boxTxt, text){
+  return `<div class="face fade-in" style="--c:${color};min-height:0"><div class="fhead"><span class="ftag">${tag}</span><span class="fbox">${boxTxt}</span></div>
+    <div class="ruled" style="padding-block:14px"><div class="q" style="padding-block:6px;font-size:clamp(19px,3vw,24px)">${text}</div></div></div>`;
+}
+function thColor(th){ return th.length === 1 ? THEMES[th[0]].color : "var(--accent)"; }
+function thLabel(th){ return th.length === TH.length ? "Tout le chapitre" : th.map(t => THEMES[t].short).join(" + "); }
+
+/* =========================================================
+   CROQUIS À COMPLÉTER (étape 0 : titre et légende ; étapes suivantes : un groupe de lieux chacune)
+   ========================================================= */
+let GX = null;
+const TITLES = TH.map(k => CRQ[k].title);
+function geoPick(){
+  view = "geopick";
+  const best = k => { const b = (S.best || {})["crq_" + k]; return b == null ? "" : `<span class="fbox">meilleur score : ${b}</span>`; };
+  app.innerHTML = `<div class="sess-head"><button class="ghost" id="quit" aria-label="Retour à l'accueil">${ico("back",16)}</button></div>
+  ${intro("var(--k-rep)", "Croquis à compléter", "glisser-déposer", "Quel croquis voulez-vous compléter ?")}
+  <div class="pick">
+    ${S.sel.map(k => `<button class="pickcard" data-kind="${k}" style="--c:${THEMES[k].color}"><span class="pk-img">${croquisSVG(k, true)}</span><span class="pk-txt"><b>${esc(CRQ[k].title)}</b><span>1. Le titre et la légende (${CROQ_LEG[k].slots.length} figurés). ${CROQ_PLACES[k].map((g, i) => (i + 2) + ". " + g.label + " (" + g.items.length + ")").join(". ")}.</span>${best(k)}</span></button>`).join("")}
+  </div>`;
+  bindQuit();
+  app.querySelectorAll("[data-kind]").forEach(b => b.onclick = () => startGeo(b.dataset.kind));
+  window.scrollTo(0, 0);
+}
+function startGeo(kind){
+  const L = CROQ_LEG[kind];
+  const G = CROQ_PLACES[kind];
+  GX = {kind, step: 0, n: G.length + 1, placed: [{}].concat(G.map(() => ({}))), checked: {}, xp0: S.xp,
+    banks: [shuffle(L.slots.map(s => s.ans).concat(TITLES))].concat(G.map(g => shuffle(g.items.map(p => p.n))))};
+  view = "geo"; renderGeo(); window.scrollTo(0, 0);
+}
+function geoTargets(si){
+  const k = GX.kind;
+  if (si === 0) return [{t: "title", ans: CRQ[k].title}].concat(CROQ_LEG[k].slots.map((s, i) => ({t: "s" + i, ans: s.ans})));
+  return CROQ_PLACES[k][si - 1].items.map(p => ({t: p.n, ans: p.n}));
+}
+const geoScore = si => { const P = GX.placed[si]; return geoTargets(si).filter(x => P[x.t] === x.ans).length; };
+const geoTotal = si => geoTargets(si).length;
+const placeXY = p => Array.isArray(p.at) ? p.at : PLACES[p.at || p.n];
+function bankHtml(si){
+  if (GX.checked[si]) return "";
+  const used = Object.values(GX.placed[si]);
+  const left = GX.banks[si].filter(l => !used.includes(l));
+  const cls = l => si === 0 ? (TITLES.includes(l) ? " ttl" : "") : " t-" + CROQ_PLACES[GX.kind][si - 1].items.find(p => p.n === l).k;
+  return `<div class="bank dock" id="bank" data-drop="bank" data-empty="Tous les noms sont placés : cliquez sur « Vérifier ».">${left.map(l => `<span class="lbl${cls(l)}" data-l="${esc(l)}">${esc(l)}</span>`).join("")}</div>
+    <p class="muted chint">Faites glisser chaque nom à sa place. Pour corriger, faites glisser un nom déjà placé vers une autre place ou vers la liste.${si === 0 ? " Attention : deux titres sont en trop." : ""}</p>`;
+}
+function renderGeo(){
+  const si = GX.step, k = GX.kind, chk = !!GX.checked[si], L = CROQ_LEG[k];
+  const sc = geoScore(si), n = geoTotal(si), tg = geoTargets(si), nPlaced = tg.filter(x => GX.placed[si][x.t]).length;
+  const steps = [...Array(GX.n).keys()];
+  const done = steps.filter(i => GX.checked[i]).length, all = done === GX.n;
+  const labels = ["Titre et légende"].concat(CROQ_PLACES[k].map(g => g.label));
+  const tabs = `<div class="ctabs" role="tablist">${labels.map((lab, i) => `<button role="tab" aria-selected="${i === si}" data-step="${i}">${GX.checked[i] ? (geoScore(i) === geoTotal(i) ? "✓ " : geoScore(i) + "/" + geoTotal(i) + " · ") : (i + 1) + ". "}${lab}</button>`).join("")}</div>`;
+  const fb = chk ? `<div class="feedback ${sc === n ? "" : "ko"} fade-in"><b class="v" style="color:${sc === n ? "var(--ok)" : "var(--ko)"}">${sc}/${n} bien placés</b>${si === 0
+      ? `<p style="margin:4px 0">Titre : <b>${esc(CRQ[k].title)}</b></p><ul>${L.slots.map(s => `<li>${s.e}</li>`).join("")}</ul>`
+      : (sc === n ? "Étape réussie sans faute." : `À retenir : ${CROQ_PLACES[k][si - 1].items.filter(p => GX.placed[si][p.n] !== p.n).map(p => `<b>${esc(p.n)}</b>`).join(", ")}. Les erreurs sont marquées ✗ sur le croquis, avec le bon nom.`)}</div>` : "";
+  const btn = `<div class="row" style="margin-top:12px">${chk
+      ? (all ? `<button class="go" id="fin">Voir mon résultat ${ico("arrow",18)}</button>` : `<button class="go" id="nextStep">Étape suivante ${ico("arrow",18)}</button>`)
+      : `<button class="go" id="check" ${nPlaced < n ? "disabled" : ""}>Vérifier ${ico("arrow",18)}</button>`}</div>`;
+  let body;
+  if (si === 0) {
+    const P = GX.placed[0];
+    const slot = (key, ans, cls) => {
+      const st = chk ? (P[key] === ans ? " good" : " bad") : "";
+      return `<div class="slot${st}${cls || ""}" data-drop="${key}">${P[key] ? `<span class="lbl${TITLES.includes(P[key]) ? " ttl" : ""}" data-l="${esc(P[key])}">${esc(P[key])}</span>` : ""}</div>`;
+    };
+    const corr = (key, ans, eq) => chk && P[key] !== ans ? `<div class="corr${eq ? " eqc" : ""}">→ ${esc(ans)}</div>` : "";
+    const row = (s, i) => `<div class="lrow"><span class="fig">${s.fig}</span>${slot("s" + i, s.ans)}</div>${corr("s" + i, s.ans)}`;
+    body = `<div class="sch">
+      <div class="sch-draw"><span class="ftag">Croquis à compléter</span>${croquisSVG(k)}</div>
+      <div>
+        <p class="cons">Retrouvez le titre et complétez la légende du croquis.</p>
+        <div class="face" style="--c:${THEMES[k].color};min-height:0;margin-top:8px"><div class="fhead"><span class="ftag">Titre et légende</span></div>
+          <div class="leg"><div class="lrow"><span class="eqt"><b>Titre :</b></span>${slot("title", CRQ[k].title)}</div>${corr("title", CRQ[k].title, true)}
+          ${L.groups.map((g, gi) => `<h5>${esc(g)}</h5>${L.slots.map((s, i) => [s, i]).filter(([s]) => s.g === gi).map(([s, i]) => row(s, i)).join("")}`).join("")}</div></div>
+        ${bankHtml(0)}${fb}${btn}
+      </div></div>`;
+  } else {
+    const hasDots = !!CRQ[k].dots;
+    const els = CROQ_PLACES[k].map((g, gi0) => {
+      const gi = gi0 + 1;
+      if (gi !== si) return ""; // une seule couche de noms à la fois, pour rester lisible
+      const P = GX.placed[gi], ck = !!GX.checked[gi];
+      return g.items.map((p, ii) => {
+        const [x, y] = toPct(...placeXY(p)), lab = P[p.n], pos = `left:${x}%;top:${y}%`;
+        const cls = "t-" + p.k + (p.k === "ville" && hasDots ? (p.b ? " below" : " above") : "");
+        if (ck) { const ok = lab === p.n; return `<span class="mtag ${cls} ${ok ? "ok" : "ko"}" style="${pos}" title="${ok ? "Bien placé" : "Votre réponse : " + esc(lab || "—")}">${ok ? "" : "✗ "}${esc(p.n)}</span>`; }
+        if (lab) return `<span class="mtag ${cls} cur" style="${pos}" data-drop="${esc(p.n)}" data-l="${esc(lab)}">${esc(lab)}</span>`;
+        return `<span class="pin t-${p.k}" style="${pos}" data-drop="${esc(p.n)}" aria-label="Emplacement ${ii + 1}">${ii + 1}</span>`;
+      }).join("");
+    }).join("");
+    const cons = {ville: "Placez les métropoles (en rouge, à côté de leur point).", reg: "Placez les régions et les espaces (en noir, en capitales).", drom: "Placez les cinq DROM dans les cadres à gauche du croquis."}[CROQ_PLACES[k][si - 1].items[0].k];
+    body = `<div class="cgrid">
+      <div class="cmap">${croquisSVG(k)}${els}</div>
+      <div class="cside"><p class="cons">${cons}</p>${bankHtml(si)}${fb}${btn}</div>
+    </div>`;
+  }
+  app.innerHTML = `${head(done, GX.n, `${done}/${GX.n} étapes`)}
+    <div class="crq-title" style="--c:${THEMES[k].color}">${ico(THEMES[k].icon,18)} ${esc(THEMES[k].label)}</div>${tabs}${body}`;
+  bindQuit();
+  app.querySelectorAll("[data-step]").forEach(b => b.onclick = () => { GX.step = +b.dataset.step; keepScroll(renderGeo); });
+  const ns = $("#nextStep"); if (ns) ns.onclick = () => { GX.step = steps.find(i => !GX.checked[i]); renderGeo(); window.scrollTo(0, 0); };
+  const fi = $("#fin"); if (fi) fi.onclick = endGeo;
+  const ck = $("#check"); if (ck) ck.onclick = () => {
+    GX.checked[si] = true;
+    let gain = sc * 3; if (sc === n) gain += 10;
+    addXP(gain); markDay(); save(); checkBadges(); keepScroll(renderGeo);
+  };
+  if (!chk) bindGeoDrag();
+}
+function geoPlace(label, target){
+  const P = GX.placed[GX.step];
+  for (const key in P) if (P[key] === label) delete P[key];
+  if (target !== "bank") P[target] = label;
+  keepScroll(renderGeo);
+}
+function bindGeoDrag(){
+  const under = (x, y) => { const el = document.elementFromPoint(x, y); return el && el.closest("[data-drop]"); };
+  app.querySelectorAll(".lbl[data-l], .mtag.cur").forEach(ch => {
+    ch.addEventListener("pointerdown", e => {
+      if (e.button > 0) return; e.preventDefault();
+      const sx = e.clientX, sy = e.clientY; let gh = null, moved = false, ly = e.clientY;
+      const mv = ev => {
+        if (!moved && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 5) {
+          moved = true; gh = ch.cloneNode(true); gh.className = "lbl dragghost " + [...ch.classList].filter(c => c.startsWith("t-") || c === "ttl").join(" ");
+          gh.removeAttribute("style"); document.body.appendChild(gh); ch.classList.add("dragging");
+        }
+        if (moved) {
+          if (ev.clientY < 60 && ev.clientY < ly) scrollBy(0, -16); else if (ev.clientY > innerHeight - 60 && ev.clientY > ly) scrollBy(0, 16);
+          gh.style.left = ev.clientX + "px"; gh.style.top = ev.clientY + "px";
+          const t = under(ev.clientX, ev.clientY); app.querySelectorAll("[data-drop]").forEach(p => p.classList.toggle("hover", p === t && t !== ch));
+        }
+        ly = ev.clientY;
+      };
+      const up = ev => {
+        removeEventListener("pointermove", mv); removeEventListener("pointerup", up); removeEventListener("pointercancel", up);
+        if (!moved) return;
+        gh.remove(); ch.classList.remove("dragging");
+        const t = under(ev.clientX, ev.clientY);
+        if (t && t !== ch) geoPlace(ch.dataset.l, t.dataset.drop); else keepScroll(renderGeo);
+      };
+      addEventListener("pointermove", mv); addEventListener("pointerup", up); addEventListener("pointercancel", up);
+    });
+  });
+}
+function endGeo(){
+  view = "end"; track("session-croquis"); report("Croquis");
+  const k = GX.kind, steps = [...Array(GX.n).keys()];
+  const ok = steps.reduce((s, i) => s + geoScore(i), 0), tot = steps.reduce((s, i) => s + geoTotal(i), 0), perfect = ok === tot;
+  S.best = S.best || {}; const prev = S.best["crq_" + k] ? +String(S.best["crq_" + k]).split("/")[0] : 0; S.best["crq_" + k] = Math.max(prev, ok) + "/" + tot;
+  if (perfect) { addXP(20); confetti(); }
+  save(); checkBadges({geo: perfect});
+  const wrong = [];
+  geoTargets(0).forEach(x => { if (GX.placed[0][x.t] !== x.ans) wrong.push({tag: x.t === "title" ? "Titre" : "Légende", n: x.ans, you: GX.placed[0][x.t] || "—"}); });
+  CROQ_PLACES[k].forEach((g, gi) => g.items.forEach(p => { if (GX.placed[gi + 1][p.n] !== p.n) wrong.push({tag: g.label, n: p.n, you: GX.placed[gi + 1][p.n] || "—"}); }));
+  app.innerHTML = `
+  <div class="endcard fade-in">
+    <div><span class="ftag" style="color:var(--accent)">${esc(CRQ[k].title)}</span><h2>${ok}/${tot}${perfect ? " · Sans faute !" : ""}</h2></div>
+    <div class="endstats">
+      <div class="stat"><b class="o">${ok}</b><span>noms bien placés</span></div>
+      <div class="stat"><b class="k">${wrong.length}</b><span>erreurs</span></div>
+      <div class="stat"><b class="x">+${S.xp - GX.xp0}</b><span>XP gagnés</span></div>
+      <div class="stat"><b>${pct(mastery(CARDS))} %</b><span>maîtrise du chapitre</span></div>
+    </div>
+    ${wrong.length ? `<div class="miss">${wrong.map(w => `<details style="--c:var(--k-rep)"><summary><span class="ftag">${esc(w.tag)}</span>${esc(w.n)}</summary><p class="muted">À cet endroit, vous aviez placé : ${esc(w.you)}</p></details>`).join("")}</div>` : ""}
+    <div class="row">
+      <button class="go" id="again">${ico("loop",18)} Recommencer</button>
+      ${S.sel.length > 1 ? `<button class="go alt" id="other">Autre croquis</button>` : ""}
+      <button class="go alt" id="back">Accueil</button>
+    </div>
+  </div>`;
+  $("#again").onclick = () => startGeo(k); $("#back").onclick = home;
+  const ot = $("#other"); if (ot) ot.onclick = geoPick;
+  window.scrollTo(0, 0);
+}
+
+/* =========================================================
+   CONSTRUIRE UN PLAN
+   ========================================================= */
+function planHtml(p){
+  return `<div class="plan"><div class="pl-i"><b>Introduction</b>${p.intro}</div>` +
+    p.parts.map((t, i) => `<div class="pl-p"><b>${ROMAN[i]}. ${t}</b><ul>${p.ideas.filter(x => x.p === i).map(x => `<li>${x.t}</li>`).join("")}</ul></div>`).join("") +
+    `<div class="pl-i"><b>Conclusion</b>${p.concl}</div></div>`;
+}
+let PL = null;
+function planPick(){
+  view = "planpick";
+  app.innerHTML = `<div class="sess-head"><button class="ghost" id="quit" aria-label="Retour à l'accueil">${ico("back",16)}</button></div>
+  ${intro("var(--c-methode)", "Construire un plan", "développement construit", "Choisissez un sujet. Rangez chaque idée dans la bonne partie et repérez l'idée hors sujet (✕).")}
+  <div class="subj">${subjAvail().map(([s, g]) => `<button class="ev" data-g="${g}" style="--c:var(--c-methode)"><span class="n">${g + 1}</span><span><span class="tg">Sujet ${g + 1}${g < 2 ? " · au choix : un espace productif" : " · tout le chapitre"}</span>${esc(s)}</span></button>`).join("")}</div>`;
+  bindQuit();
+  app.querySelectorAll("[data-g]").forEach(b => b.onclick = () => variantPick(+b.dataset.g));
+  window.scrollTo(0, 0);
+}
+function variantPick(g){
+  const vs = plansAvail().filter(([p]) => p.g === g);
+  if (vs.length === 1) return startPlan(vs[0][1]);
+  view = "planpick";
+  app.innerHTML = `<div class="sess-head"><button class="ghost" id="back2" aria-label="Retour aux sujets">${ico("back",16)}</button></div>
+  ${intro("var(--c-methode)", "Sujet " + (g + 1), "choisissez l'espace", esc(SUBJECTS[g]))}
+  <p class="cons" style="margin:14px 0 0">Quel espace productif voulez-vous traiter ?</p>
+  <div class="subj">${vs.map(([p, i]) => `<button class="ev" data-p="${i}" style="--c:${thColor(p.th)}"><span class="n">${ico(THEMES[p.th[0]].icon,16)}</span><span><span class="tg">${esc(THEMES[p.th[0]].short)}</span>${esc(p.label)}</span></button>`).join("")}</div>`;
+  $("#back2").onclick = planPick;
+  app.querySelectorAll("[data-p]").forEach(b => b.onclick = () => startPlan(+b.dataset.p));
+  window.scrollTo(0, 0);
+}
+function startPlan(i){ PL = {p: i, as: {}, checked: false, order: shuffle(PLANS[i].ideas.map((_, k) => k)), xp0: S.xp}; view = "plan"; renderPlan(); window.scrollTo(0, 0); }
+function renderPlan(){
+  const Pn = PLANS[PL.p], as = PL.as, n = Object.keys(as).length, tot = Pn.ideas.length;
+  const ok = k => as[k] === Pn.ideas[k].p, score = Pn.ideas.filter((_, k) => ok(k)).length, perfect = score === tot;
+  app.innerHTML = `${head(n, tot, `${n}/${tot}`)}
+  <div class="face${PL.drawn ? "" : " fade-in"}" style="--c:var(--c-methode);min-height:0"><div class="fhead"><span class="ftag">Sujet ${Pn.g + 1}${Pn.g < 2 ? " · " + esc(Pn.label) : ""}</span><span class="fbox">${tot} idées à ranger</span></div>
+    <div class="ruled" style="padding-block:14px"><div class="q" style="padding-block:4px;font-size:clamp(18px,2.8vw,22px)">« ${esc(SUBJECTS[Pn.g])} »</div>
+    <div class="skel">${Pn.parts.map((t, i) => `<div><b>${ROMAN[i]}.</b>${esc(t)}</div>`).join("")}<div class="muted"><b>✕</b>Hors sujet</div></div></div></div>
+  ${PL.order.map(k => { const id = Pn.ideas[k], st = PL.checked ? (ok(k) ? " right" : " wrong") : "";
+    return `<div class="idea${st}"><p>${esc(id.t)}${PL.checked && !ok(k) ? `<span class="why">→ ${id.p < 0 ? "Hors sujet : " + esc(id.w) : "Partie " + ROMAN[id.p] + " : " + esc(Pn.parts[id.p])}</span>` : ""}</p>
+      <div class="seg" role="group" aria-label="Partie">${[...Pn.parts.map((_, i) => i), -1].map(v => `<button data-k="${k}" data-v="${v}" aria-pressed="${as[k] === v}" ${PL.checked ? "disabled" : ""}>${v < 0 ? "✕" : ROMAN[v]}</button>`).join("")}</div></div>`; }).join("")}
+  ${PL.checked ? `<div class="feedback ${perfect ? "" : "ko"} fade-in"><b class="v" style="color:${perfect ? "var(--ok)" : "var(--ko)"}">${score}/${tot} idées bien placées</b><div style="margin-bottom:8px">Voici le plan modèle, à savoir refaire le jour de l'évaluation :</div>${planHtml(Pn)}</div>
+    <div class="row" style="margin-top:14px"><button class="go" id="other">Autre sujet ${ico("arrow",18)}</button><button class="go alt" id="back">Accueil</button></div>`
+  : `<div class="row" style="margin-top:14px"><button class="go" id="check" ${n < tot ? "disabled" : ""}>Vérifier mon plan ${ico("arrow",18)}</button></div>`}`;
+  PL.drawn = true;
+  bindQuit();
+  if (PL.checked) { $("#other").onclick = planPick; $("#back").onclick = home; return; }
+  app.querySelectorAll("[data-k]").forEach(b => b.onclick = () => { PL.as[+b.dataset.k] = +b.dataset.v; keepScroll(renderPlan); });
+  $("#check").onclick = () => {
+    PL.checked = true; track("session-plan"); report("Plan");
+    let gain = score * 3; if (perfect) { gain += 15; confetti(); }
+    addXP(gain); markDay(); save(); checkBadges(); keepScroll(renderPlan);
+  };
+}
+
+/* =========================================================
+   RELIRE TOUTES LES CARTES
+   ========================================================= */
+function listView(){
+  view = "list";
+  app.innerHTML = `<div class="sess-head"><button class="ghost" id="quit">${ico("back",16)} Bilan</button></div>
+  <div class="sec-title" style="margin-top:0"><h3>Toutes les cartes</h3><span class="muted" style="font-size:14px">${CARDS.length} cartes</span></div>
+  ${TH.map(t => `<div class="sec-title"><h3 style="color:${THEMES[t].color};font-size:21px">${esc(THEMES[t].label)}</h3></div>
+    ${TY.map(k => { const l = CARDS.filter(c => c.t === t && c.k === k); return l.length ? `<h4 class="listh">${esc(TYPES[k].label)}</h4>
+    <div class="miss">${l.map(c => `<details style="--c:${THEMES[t].color}"><summary><span class="ftag">${c.aj ? "Ajout" : esc(TYPES[k].short)}</span>${strip(c.q)}</summary><p><b>${c.a}</b></p>${c.d ? `<div style="margin-top:6px">${c.d}</div>` : ""}${c.p ? `<div style="margin-top:6px" class="muted">${c.p}</div>` : ""}</details>`).join("")}</div>` : ""; }).join("")}`).join("")}`;
+  $("#quit").onclick = badgesView;
+  window.scrollTo(0, 0);
+}
+
+/* =========================================================
+   BADGES ET BILAN
+   ========================================================= */
+function badgesView(){ view = "badges"; confirmReset = false; renderBadges(); }
+function renderBadges(){
+  const lv = level(), g = mastery(CARDS);
+  const bar = (label, color, m, bold) => `<div class="tbar" style="--c:${color}${bold ? ";font-weight:700" : ""}"><span>${esc(label)}</span><div class="mbar"><i style="width:${pct(m)}%"></i></div><b>${pct(m)}%</b></div>`;
+  app.innerHTML = `
+  <div class="sess-head"><button class="ghost" id="quit">${ico("back",16)} Accueil</button></div>
+  <section class="bilan fade-in">
+    ${g >= .7 ? `<span class="stamp">Prêt !</span>` : ""}
+    <span class="ftag" style="color:var(--accent)">Bilan de révision · G2</span>
+    <h2>Mon bilan</h2>
+    <div class="muted" style="font-size:14.5px">Niveau ${lv.n}/${LEVELS.length} · ${esc(lv.name)} · ${S.xp} XP · ${S.reviewed} cartes révisées · ${Object.keys(S.badges).length}/${BADGES.length} badges${S.examBest ? " · meilleure évaluation blanche : " + String(S.examBest).replace(".", ",") + "/20" : ""}</div>
+    <h5 class="bh">Par thème</h5>
+    <div class="tbars">${TH.map(t => bar(THEMES[t].label, THEMES[t].color, mastery(inTheme(t)))).join("")}${bar("Tout le chapitre", "var(--ok)", g, true)}</div>
+    <h5 class="bh">Par type de questions</h5>
+    <div class="tbars">${TY.map(k => bar(TYPES[k].label, TYPES[k].color, mastery(inType(k)))).join("")}</div>
+  </section>
+  <div class="sec-title"><h3>Badges</h3><span class="muted" style="font-size:14px">${Object.keys(S.badges).length} sur ${BADGES.length}</span></div>
+  <div class="badges-grid">
+    ${BADGES.map(b => { const has = !!S.badges[b.id]; return `<div class="bitem${has ? "" : " locked"}">${medal(b, !has)}<div><b>${esc(b.name)}</b><p>${esc(b.desc)}</p></div></div>`; }).join("")}
+  </div>
+  <div class="sec-title"><h3>Relire toutes les cartes</h3><button class="linkbtn" id="toList">Ouvrir la liste</button></div>
+  <div class="sec-title"><h3>Recommencer à zéro</h3></div>
+  <div class="confirm-box" id="resetZone">
+    ${confirmReset ? `<span>Tout effacer (XP, badges, progression) ?</span><button class="danger" id="yes">Oui, tout effacer</button><button class="ghost" id="no">Annuler</button>`
+      : `<button class="danger" id="reset">Effacer ma progression</button>`}
+  </div>`;
+  $("#quit").onclick = home;
+  $("#toList").onclick = listView;
+  if (confirmReset) { $("#yes").onclick = () => { S = fresh(); save(); home(); }; $("#no").onclick = () => { confirmReset = false; renderBadges(); }; }
+  else $("#reset").onclick = () => { confirmReset = true; renderBadges(); };
+  window.scrollTo(0, 0);
+}
+
+/* ---------- Clavier ---------- */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") return;
+  if (view === "flip") {
+    if (e.key === " " || e.key === "Enter") { e.preventDefault(); doFlip(); }
+    if (F && F.flipped && ["1","2","3"].includes(e.key)) rateFlip(+e.key - 1);
+  }
+});
+
+home();
+reportVisit();
+})();
+
+</script>
+<!-- Compteur de visites anonyme (GoatCounter, sans cookies) -->
+<script data-goatcounter="https://jeannehg.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
